@@ -1,3 +1,3 @@
 export default function MainBody() {
-  return <div>this is main body</div>;
+  return <div>This is the main body</div>;
 }
