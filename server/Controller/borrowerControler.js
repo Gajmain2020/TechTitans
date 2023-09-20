@@ -61,7 +61,7 @@ export const postRequirement = async (req, res) => {
   }
 };
 
-// ! to get only 20 posts will be sent to a
+// ! to get only 20 posts will be sent to frontend at once
 export const fetchPostsInitially = async (req, res) => {
   try {
     if (req.query.page !== undefined) {
