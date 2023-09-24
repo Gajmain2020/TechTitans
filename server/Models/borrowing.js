@@ -9,7 +9,14 @@ const borrowingSchema = mongoose.Schema({
   interest: String,
   period: String,
   open: { type: Boolean, default: true },
-  comments: [{ commenter: String, commenterId: String, comment: String }],
+  comments: [
+    {
+      commenter: String,
+      commenterId: String,
+      comment: String,
+      commentTime: { type: Date, default: new Date() },
+    },
+  ],
   borrowedDate: { type: Date },
   createdAt: { type: Date, default: new Date() },
   updatedAt: { type: Date, default: new Date() },
