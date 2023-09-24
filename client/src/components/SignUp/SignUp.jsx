@@ -9,7 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -37,11 +37,6 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  function handleBack() {
-    setForm(form - 1);
-    setIsChecked(true);
-  }
-
   const InitialValuesofForm = {
     name: "",
     email: "",
@@ -73,6 +68,7 @@ export default function SignUp() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
   const [formErrors, setFromErrors] = useState(InitialFormErrors);
+  const [warning, setWarning] = useState("");
 
   const handleClick = (e) => {
     if (
@@ -85,9 +81,13 @@ export default function SignUp() {
     ) {
       setForm(1);
     } else {
-      alert("Please fill the form correctly!");
+      setWarning("Please fill the form correctly!");
     }
   };
+  function handleBack() {
+    setForm(form - 1);
+    setIsChecked(true);
+  }
 
   const handleChangeName = (e) => {
     const { name, value } = e.target;
@@ -116,19 +116,22 @@ export default function SignUp() {
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleChangePan = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleChangeAadhar = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
   function checkboxClicked() {
     // Get the checkbox element by its ID
     let checkbox = document.getElementById("checkbox");
     const { pan, aadhar, ...form1 } = formValues;
     // Check if the checkbox is checked
-    if (
-      checkbox.checked &&
-      !formErrors.nameErr.status &&
-      !formErrors.emailErr.status &&
-      !formErrors.passwordErr.status &&
-      !formErrors.confirmPasswordErr.status &&
-      !formErrors.mobileErr.status
-    ) {
+    if (checkbox.checked) {
       setIsChecked(true);
       setIsDisabled(false);
     } else {
@@ -139,9 +142,12 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    if (!formErrors.panErr.status && !formErrors.aadharErr.status) {
+      console.log(formValues);
+    } else {
+      setWarning("Please fill the form correctly");
+    }
   };
-
   function handleBlurName() {
     if (formValues.name == "") {
       setFromErrors({
@@ -225,6 +231,36 @@ export default function SignUp() {
       });
     }
   }
+  function handleBlurPan() {
+    if (formValues.pan == "") {
+      setFromErrors({
+        ...formErrors,
+        panErr: { status: true, value: "Pan No. is Required" },
+      });
+    } else if (formValues.pan.length < 10 || formValues.pan.length > 10) {
+      setFromErrors({
+        ...formErrors,
+        panErr: { status: true, value: "Please enter a valid Pan no." },
+      });
+    } else {
+      setFromErrors({ ...formErrors, panErr: { status: false, value: "" } });
+    }
+  }
+  function handleBlurAadhar() {
+    if (formValues.aadhar == "") {
+      setFromErrors({
+        ...formErrors,
+        aadharErr: { status: true, value: "Aadhar No. is Required" },
+      });
+    } else if (formValues.aadhar.length < 12 || formValues.aadhar.length > 12) {
+      setFromErrors({
+        ...formErrors,
+        aadharErr: { status: true, value: "Please enter a valid Aadhar no." },
+      });
+    } else {
+      setFromErrors({ ...formErrors, aadharErr: { status: false, value: "" } });
+    }
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -240,7 +276,7 @@ export default function SignUp() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+            {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -352,6 +388,11 @@ export default function SignUp() {
                     />
                   </Grid>
                 </Grid>
+                <Grid container justifyContent="center" spacing={2}>
+                  <Grid item>
+                    <p className="text-red-900">{warning}</p>
+                  </Grid>
+                </Grid>
                 <Button
                   fullWidth
                   variant="contained"
@@ -381,7 +422,10 @@ export default function SignUp() {
                       type="text"
                       id="pan"
                       value={formValues.pan}
-                      // onChange={handleChange}
+                      onChange={handleChangePan}
+                      onBlur={handleBlurPan}
+                      error={formErrors.panErr.status}
+                      helperText={formErrors.panErr.value}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -393,8 +437,16 @@ export default function SignUp() {
                       type="text"
                       id="aadhar"
                       value={formValues.aadhar}
-                      // onChange={handleChange}
+                      onChange={handleChangeAadhar}
+                      onBlur={handleBlurAadhar}
+                      error={formErrors.aadharErr.status}
+                      helperText={formErrors.aadharErr.value}
                     />
+                  </Grid>
+                </Grid>
+                <Grid container justifyContent="center" spacing={2}>
+                  <Grid item>
+                    <p className="text-red-900">{warning}</p>
                   </Grid>
                 </Grid>
                 <Button
