@@ -50,15 +50,6 @@ function Post(props) {
   const replyRef = useRef(null);
 
 
-  // function onChange(e) {
-  //   console.log("re-rendered")
-  //   setReply(e.target.value)
-  //   setIsDisabled(false)
-  //   if (reply.length == null) {
-  //     setIsDisabled(true)
-  //   }
-  // }
-
   function handleCommentButton() {
     SetShowCommentModal(true);
     setOpen(true);
@@ -86,13 +77,13 @@ function Post(props) {
   function CommentModal() {
     return (
       <>
-        <div className="flex-col  p-2 bg-background rounded-2xl text-primary  h-auto pt-2 sm:w-full md:w-[50%] flex gap-2">
+        <div className="p-2 flex-col bg-background rounded-2xl text-primary  h-auto pt-2 sm:w-full md:w-[50%] flex gap-2">
           <div>
             <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>
           </div>
-          <div className="flex justify-start gap-2 px-2">
+          <div className="flex flex-col justify-start gap-2 px-2">
             <div className="h-full">
               <Avatar {...stringAvatar(name)} />
             </div>
@@ -153,15 +144,18 @@ function Post(props) {
   }
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex">
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
-      // onClick={handleClose}
+      // onClick={handleClose}  
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
       >
         {showCommentModal && <CommentModal />}
       </Backdrop>
-      <div className="flex-col bg-background  hover:bg-background_posts_hover  h-auto pt-2 sm:w-full md:w-[50%] flex gap-2">
+      <div className="flex-col bg-background  hover:bg-background_posts_hover  h-auto pt-2 sm:w-full flex gap-2">
         <div className="flex justify-start gap-2 px-2">
           <div className="h-full">
             <Avatar {...stringAvatar(name)} />
