@@ -7,9 +7,12 @@ import SignUp from "./components/Signup/Signup";
 
 function App() {
   return (
-    <>
-      <SignUp />
-    </>
+    <div>
+      <Post name="Divyanshi S" date="12 dec"/>
+      <Post name="Gajju S" date="12 dec"/>
+      <Post name="Devdeep G"date="12 dec"/>
+      <Post name="Gitesh S"date="12 dec"/>
+    </div>
   );
 }
 

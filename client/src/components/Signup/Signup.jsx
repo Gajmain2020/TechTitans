@@ -307,7 +307,6 @@ export default function SignUp() {
                       error={formErrors.nameErr.status}
                       helperText={formErrors.nameErr.value}
                     />
-                    {/* <p className="text-red-900">{formErrors.nameErr.}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -322,7 +321,6 @@ export default function SignUp() {
                       error={formErrors.emailErr.status}
                       helperText={formErrors.emailErr.value}
                     />
-                    {/* <p className="text-red-900">{formErrors.email}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -338,7 +336,6 @@ export default function SignUp() {
                       error={formErrors.passwordErr.status}
                       helperText={formErrors.passwordErr.value}
                     />
-                    {/* <p className="text-red-900">{formErrors.password}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -354,7 +351,6 @@ export default function SignUp() {
                       error={formErrors.confirmPasswordErr.status}
                       helperText={formErrors.confirmPasswordErr.value}
                     />
-                    {/* <p className="text-red-900">{formErrors.confirmPassword}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -370,9 +366,8 @@ export default function SignUp() {
                       error={formErrors.mobileErr.status}
                       helperText={formErrors.mobileErr.value}
                     />
-                    {/* <p className="text-red-900">{formErrors.mobile}</p> */}
                   </Grid>
-                  <Grid item xs={12}></Grid>
+                  {/* <Grid item xs={12}></Grid> */}
                   <Grid item xs={12}>
                     <FormControlLabel
                       control={
