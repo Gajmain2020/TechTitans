@@ -4,11 +4,13 @@ import MainBody from "./components/MainBody/MainBody";
 import Navbar from "./components/Navbar/Navbar";
 import Post from "./components/Post";
 import SignUp from "./components/Signup/Signup";
+import SignIn from "./components/SignIn/SignIn";
 
 function App() {
   return (
     <div>
-      <SignUp />
+      <SignIn />
+      
     </div>
   );
 }
