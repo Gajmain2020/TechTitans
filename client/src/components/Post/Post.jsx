@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import Backdrop from '@mui/material/Backdrop';
@@ -77,7 +76,7 @@ function Post(props) {
   function CommentModal() {
     return (
       <>
-        <div className="p-2 flex-col bg-background rounded-2xl text-primary  h-auto pt-2 sm:w-full md:w-[50%] flex gap-2">
+        <div className="p-2 flex-col bg-background rounded-2xl text-primary  h-auto pt-2 xsm:w-full md:w-[50%] flex gap-2">
           <div>
             <IconButton onClick={handleClose}>
               <CloseIcon />
@@ -144,7 +143,7 @@ function Post(props) {
   }
 
   return (
-    <div className="w-full flex">
+    <div className="w-full md:ml-20 flex">
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -155,7 +154,7 @@ function Post(props) {
       >
         {showCommentModal && <CommentModal />}
       </Backdrop>
-      <div className="flex-col bg-background  hover:bg-background_posts_hover  h-auto pt-2 sm:w-full flex gap-2">
+      <div className="flex-col bg-background  hover:bg-background_posts_hover  h-auto pt-2 xsm:w-full flex gap-2">
         <div className="flex justify-start gap-2 px-2">
           <div className="h-full">
             <Avatar {...stringAvatar(name)} />

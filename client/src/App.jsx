@@ -6,23 +6,14 @@ import Post from "./components/Post/Post";
 import SignUp from "./components/SignUp/Signup";
 import SideBar from "./components/SideBar/SideBar";
 import Toolbar from '@mui/material/Toolbar';
+import Content from './Content';
+import Profile from "./Profile";
+import ResponsiveAppBar from "./experiment";
 
 function App() {
   return (
-    <div className="flex">
-      <SideBar />
-      <div className=" flex flex-col mt-24 sm:w-full md:w-[50%] ">
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-      </div>
+    <Profile />
 
-    </div>
   );
 }
 
