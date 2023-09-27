@@ -15,8 +15,8 @@ export const signupUser = async (req, res) => {
       });
     }
     const hashPassword = await bcrypt.hash(userData.password, 10);
-    const hashAadhar = await bcrypt.hash(userData.aadhar, 6);
-    const hashPan = await bcrypt.hash(userData.pan, 6);
+    const hashAadhar = await bcrypt.hash(userData.aadhar, 8);
+    const hashPan = await bcrypt.hash(userData.pan, 8);
 
     await User.create({
       name: userData.name,
@@ -34,6 +34,7 @@ export const signupUser = async (req, res) => {
       .status(200)
       .json({ message: "User Signed Up Successfully", success: true });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: "Internal Server Error. Please try again later.",
       success: false,

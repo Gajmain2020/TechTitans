@@ -12,6 +12,8 @@ import commonRoutes from "./Routes/commonRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3002;
+const MONGODB_CONNECT_URI =
+  "mongodb+srv://gajju:gajju@cluster0.pzrazza.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,19 +21,18 @@ app.use(cookieParser());
 app.use(express.static("files"));
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.set("strictQuery", true);
-
 app.use("/api/admin", adminRoutes);
 app.use("/api/borrower", borrowerRoutes);
 app.use("/api/lender", lenderRoutes);
 app.use("/api/common", commonRoutes);
 
 mongoose
-  .connect("mongodb://localhost:27017/opinhacks")
+  .connect(MONGODB_CONNECT_URI)
   .then(() =>
     app.listen(PORT, () => {
-      console.log(`We are good to go....`);
+      console.log(`MongoDB Connected....`);
       console.log(`Server Running At :: http://localhost:${PORT}`);
     })
   )
+  .catch((err) => console.log(err))
   .catch((err) => console.log(err.message));
