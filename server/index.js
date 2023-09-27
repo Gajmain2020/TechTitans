@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/admin", adminRoutes);
 app.use("/api/borrower", borrowerRoutes);
 app.use("/api/lender", lenderRoutes);
-app.use("/api/common", commonRoutes);
+app.use("/api/user", commonRoutes);
 
 mongoose
   .connect(MONGODB_CONNECT_URI)

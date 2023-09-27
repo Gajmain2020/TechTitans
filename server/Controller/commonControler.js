@@ -7,6 +7,7 @@ import Complaints from "../Models/complaints.js";
 export const signupUser = async (req, res) => {
   try {
     const userData = req.body;
+    console.log(req.body);
     const isUserSignedUp = await User.findOne({ email: userData.email });
     if (isUserSignedUp) {
       return res.status(403).json({
