@@ -9,6 +9,7 @@ import Homepage from "./components/Homepage/Homepage";
 
 function App() {
   return (
+
     <>
       <Navbar />
       <div className="container flex justify-center mb-10 mx-auto w-3/4 ">
@@ -19,6 +20,7 @@ function App() {
         </Routes>
       </div>
     </>
+
   );
 }
 
