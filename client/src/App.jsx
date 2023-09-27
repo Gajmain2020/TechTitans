@@ -2,7 +2,7 @@ import "./index.css";
 // import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 // import Post from "./components/Post";
-import SignUp from "./components/Signup/Signup";
+import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import { Route, Routes } from "react-router-dom";
 import Homepage from "./components/Homepage/Homepage";
