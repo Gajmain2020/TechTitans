@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 import adminRoutes from "./Routes/adminRoutes.js";
 import borrowerRoutes from "./Routes/borrowerRoutes.js";
 import lenderRoutes from "./Routes/lenderRoutes.js";
-import commonRoutes from "./Routes/commonRoutes.js";
+import userRoutes from "./Routes/userRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/admin", adminRoutes);
 app.use("/api/borrower", borrowerRoutes);
 app.use("/api/lender", lenderRoutes);
-app.use("/api/user", commonRoutes);
+app.use("/api/user", userRoutes);
 
 mongoose
   .connect(MONGODB_CONNECT_URI)

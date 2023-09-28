@@ -8,8 +8,9 @@ import { userAuth } from "../Middleware/userAuthentication.js";
 
 const router = express.Router();
 
-router.get("/fetch-post", userAuth, fetchPostsInitially);
-router.post("/post-requirement", userAuth, postRequirement);
-router.patch("/comment", userAuth, postComment);
+//! need to add middleware while connecting it with frontend
+router.get("/fetch-post", fetchPostsInitially);
+router.post("/post-requirement", postRequirement);
+router.patch("/comment", postComment);
 
 export default router;
