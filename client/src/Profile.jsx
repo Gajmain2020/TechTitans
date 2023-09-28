@@ -9,6 +9,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Comments from './components/Comments/Comments';
+import { useParams } from 'react-router-dom';
+
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,6 +48,9 @@ function a11yProps(index) {
 
 const Profile = () => {
 
+  const params = useParams();
+  const {name} = params;
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -54,7 +60,7 @@ const Profile = () => {
     <div className="flex">
     <SideBar />
     <div className=" flex flex-col mt-24 xsm:w-full md:w-[50%] justify-center align-middle">
-        <ProfileComp />
+        <ProfileComp name={name}/>
         <Box sx={{ width: '100%' }}>
           <div className='flex justify-center md:ml-20 w-full'>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', display:'flex', justifyContent:'center' }}>

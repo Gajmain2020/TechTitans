@@ -1,20 +1,19 @@
 import "./index.css";
 import Footer from "./components/Footer/Footer";
-import MainBody from "./components/MainBody/MainBody";
-import Navbar from "./components/Navbar/Navbar";
 import Post from "./components/Post/Post";
-import SignUp from "./components/SignUp/Signup";
 import SideBar from "./components/SideBar/SideBar";
-import Toolbar from '@mui/material/Toolbar';
 import Timeline from "./components/Timeline/Timeline";
+import {Link} from 'react-router-dom'
+
 
 export default function Content() {
   return (
     <div className="flex">
       <SideBar />
       <div className=" flex flex-col mt-24 xsm:w-full md:w-[50%] ">
-        <Post name="Divyanshi Srivastava" date="12 dec" />
-        <Post name="Devdeep Goyal" date="12 dec" />
+        
+        <Link to='/post/Divyanshi Srivastava'><Post name="Divyanshi Srivastava" date="12 dec" /></Link> 
+         <Link to='/post/DevDeep Goyal'><Post name="Devdeep Goyal" date="12 dec" /></Link>
         <Post name="Divyanshi Srivastava" date="12 dec" />
         <Post name="Divyanshi Srivastava" date="12 dec" />
         <Post name="Divyanshi Srivastava" date="12 dec" />
