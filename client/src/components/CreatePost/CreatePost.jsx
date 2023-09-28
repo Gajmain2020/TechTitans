@@ -21,13 +21,26 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 const defaultTheme = createTheme();
 
 export default function CreatePost() {
+
+    const InitialFormData ={
+        title:"",
+        amount:"",
+        description:"",
+        interest:"",
+        period:"",
+    }
+
+    const [formdata, setFormdata] = React.useState(InitialFormData);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormdata({...formdata, [name]: value })
+    }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    console.log(formdata);
   };
 
   return (
@@ -54,20 +67,24 @@ export default function CreatePost() {
               margin="normal"
               required
               fullWidth
-              name="Title"
+              name="title"
               label="Title"
               type="text"
-              id="Title"
+              id="title"
+              value={formdata.title}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="Amount"
-              label="Amount"
-              name="Amount"
+              id="amount"
+              label="amount"
+              name="amount"
               autoFocus
               type='text'
+              value={formdata.amount}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -75,11 +92,13 @@ export default function CreatePost() {
               fullWidth
               id="Description"
               label="Description"
-              name="Description"
+              name="description"
               autoFocus
               rows={4}
               multiline
               type='text'
+              value={formdata.description}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -87,9 +106,11 @@ export default function CreatePost() {
               fullWidth
               id="Desired Interest"
               label="Desired Interest"
-              name="Desired Interest"
+              name="interest"
               autoFocus
               type='text'
+              value={formdata.interest}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -97,9 +118,11 @@ export default function CreatePost() {
               fullWidth
               id="Time Period"
               label="How long will you take it to return it ?"
-              name="Time Period"
+              name="period"
               autoFocus
               type='text'
+              value={formdata.period}
+              onChange={handleChange}
             />
 
             <Button
