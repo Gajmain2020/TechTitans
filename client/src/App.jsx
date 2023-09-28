@@ -11,6 +11,7 @@ import Profile from './Profile';
 import PostOpen from "./PostOpen";
 import Notifications from "./Notifications";
 import Search from "./Search";
+import CreatePost from "./components/CreatePost/CreatePost";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/post/:name" element={<PostOpen />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/createpost" element={<CreatePost />} />
 
         </Routes>
       {/* </div> */}
