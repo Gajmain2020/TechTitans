@@ -1,8 +1,6 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -13,6 +11,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import { sighUpUser } from "../../Api/user";
 
 function Copyright(props) {
   return (
@@ -37,6 +37,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const InitialValuesofForm = {
     name: "",
     email: "",
@@ -70,6 +71,7 @@ export default function SignUp() {
   const [formErrors, setFromErrors] = useState(InitialFormErrors);
   const [warning, setWarning] = useState("");
 
+  // eslint-disable-next-line no-unused-vars
   const handleClick = (e) => {
     if (
       isChecked &&
@@ -129,7 +131,7 @@ export default function SignUp() {
   function checkboxClicked() {
     // Get the checkbox element by its ID
     let checkbox = document.getElementById("checkbox");
-    const { pan, aadhar, ...form1 } = formValues;
+    // const { pan, aadhar, ...form1 } = formValues;
     // Check if the checkbox is checked
     if (checkbox.checked) {
       setIsChecked(true);
@@ -142,12 +144,14 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formErrors.panErr.status && !formErrors.aadharErr.status) {
-      console.log(formValues);
-    } else {
-      setWarning("Please fill the form correctly");
-    }
+    console.log(formValues);
+    sighUpUser(formValues)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
+
   function handleBlurName() {
     if (formValues.name == "") {
       setFromErrors({
@@ -265,8 +269,6 @@ export default function SignUp() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
         <Box
           sx={{
             marginTop: 8,
@@ -275,11 +277,9 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            {/* <LockOutlinedIcon /> */}
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign Up
           </Typography>
 
           {/* form for name email password and mobile no. */}
@@ -307,6 +307,7 @@ export default function SignUp() {
                       error={formErrors.nameErr.status}
                       helperText={formErrors.nameErr.value}
                     />
+                    {/* <p className="text-red-900">{formErrors.nameErr.}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -321,6 +322,7 @@ export default function SignUp() {
                       error={formErrors.emailErr.status}
                       helperText={formErrors.emailErr.value}
                     />
+                    {/* <p className="text-red-900">{formErrors.email}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -336,6 +338,7 @@ export default function SignUp() {
                       error={formErrors.passwordErr.status}
                       helperText={formErrors.passwordErr.value}
                     />
+                    {/* <p className="text-red-900">{formErrors.password}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -351,6 +354,7 @@ export default function SignUp() {
                       error={formErrors.confirmPasswordErr.status}
                       helperText={formErrors.confirmPasswordErr.value}
                     />
+                    {/* <p className="text-red-900">{formErrors.confirmPassword}</p> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -366,8 +370,9 @@ export default function SignUp() {
                       error={formErrors.mobileErr.status}
                       helperText={formErrors.mobileErr.value}
                     />
+                    {/* <p className="text-red-900">{formErrors.mobile}</p> */}
                   </Grid>
-                  {/* <Grid item xs={12}></Grid> */}
+                  <Grid item xs={12}></Grid>
                   <Grid item xs={12}>
                     <FormControlLabel
                       control={
@@ -456,9 +461,7 @@ export default function SignUp() {
             )}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+                <Link href="/signin">Already have an account? Sign In</Link>
               </Grid>
             </Grid>
           </Box>

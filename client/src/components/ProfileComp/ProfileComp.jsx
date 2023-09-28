@@ -31,14 +31,14 @@ function stringAvatar(name) {
 }
 
 
-const ProfileComp = () => {
+const ProfileComp = (props) => {
   return (
-    <div className='flex flex-col md:ml-20 w-full justify-center gap-2  items-center'>
+    <div className='flex flex-col md:ml-20 w-full justify-center gap-2 border p-2 items-center rounded-xl'>
 
-      <Avatar {...stringAvatar('Gitesh Sarvaiya')} />
+      <Avatar {...stringAvatar(props.name)} />
       <div className='flex flex-col justify-center items-center'>
       <p>
-        Gitesh Sarvaiya
+        {props.name}
       </p>
       <p>
         gitesh.sarvaia28@gmail.com
