@@ -31,9 +31,10 @@ export const signupUser = async (req, res) => {
       borrowings: [],
       lending: [],
     });
-    return res
-      .status(200)
-      .json({ message: "User Signed Up Successfully", success: true });
+    return res.status(200).json({
+      message: "User Signed Up Successfully",
+      success: true,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -70,10 +71,11 @@ export const loginUser = async (req, res) => {
       expiresIn: "1h",
     });
 
-    return res
-      .cookie("authToken", token)
-      .status(200)
-      .json({ message: "Login Successful...", success: true });
+    return res.cookie("token", token).status(200).json({
+      message: "Login Successful...",
+      authToken: token,
+      success: true,
+    });
   } catch (error) {
     return res.status(500).json({
       message: "Internal Server Error. Please try again later",
@@ -114,7 +116,55 @@ export const postComplaint = async (req, res) => {
   }
 };
 
-export const test = async (req, res) => {
-  console.log("helllllo");
-  return res.status(200).json({ message: "hello from controller" });
+export const updateUserDetails = async (req, res) => {
+  try {
+    const { oldUserData, newUserData } = req.body;
+    const oldUser = await User.findById(oldUserData.id);
+    if (!oldUser) {
+      return res.status(404).json({
+        message:
+          "No user with id " + oldUserData.id + " exists in the database.",
+        success: false,
+      });
+    }
+    const chkPassword = await bcrypt.compare(
+      oldUserData.password,
+      oldUser.password
+    );
+    if (!chkPassword) {
+      return res.status(401).json({
+        message: "Password is incorrect. Please try again.",
+        success: false,
+      });
+    }
+    oldUser.name = newUserData?.name || oldUser.name;
+    oldUser.email = newUserData?.email || oldUser.email;
+    if (newUserData?.password !== null) {
+      const hash = await bcrypt.hash(newUserData.password, 10);
+      oldUser.password = hash;
+    }
+    oldUser.mobile = newUserData?.mobile || oldUser.mobile;
+
+    oldUser.save();
+
+    const token = jwt.sign(
+      { name: oldUser.name, id: oldUser._id },
+      "PRIVATE_KEY",
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    return res.status(200).json({
+      authToken: token,
+      message: "User updated successfully.",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal Server Error. Please try again",
+      success: false,
+    });
+  }
 };

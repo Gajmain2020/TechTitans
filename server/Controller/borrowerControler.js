@@ -54,6 +54,7 @@ export const postRequirement = async (req, res) => {
       .status(200)
       .json({ message: "Posted Successfully...", success: true });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: "Internal Server Error. Please try again",
       success: false,
