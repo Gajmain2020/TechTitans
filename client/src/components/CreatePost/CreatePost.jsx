@@ -13,12 +13,68 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import Slider from '@mui/material/Slider';
+import MenuItem from '@mui/material/MenuItem';
 
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
+
+const currencies = [
+  {
+    value: '1',
+    label: '1 month'
+  },
+  {
+    value: '2',
+    label:  '2 months'
+
+  },
+  {
+    value: '3',
+    label: '3 months',
+  },
+  {
+    value: '4',
+    label: '4 months',
+  },
+  {
+    value: '5',
+    label: '6 month'
+  },
+  {
+    value: '6',
+    label:  '6 months'
+
+  },
+  {
+    value: '7',
+    label: '7 months',
+  },
+  {
+    value: '8',
+    label: '8 months',
+  },
+  {
+    value: '9',
+    label: '9 month'
+  },
+  {
+    value: '10',
+    label:  '10 months'
+
+  },
+  {
+    value: '11',
+    label: '11 months',
+  },
+  {
+    value: '12',
+    label: '12 months',
+  },
+];
 
 export default function CreatePost() {
 
@@ -50,19 +106,23 @@ export default function CreatePost() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <AccountBalanceIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Create Post
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -82,7 +142,7 @@ export default function CreatePost() {
               label="amount"
               name="amount"
               autoFocus
-              type='text'
+              type="text"
               value={formdata.amount}
               onChange={handleChange}
             />
@@ -96,7 +156,7 @@ export default function CreatePost() {
               autoFocus
               rows={4}
               multiline
-              type='text'
+              type="text"
               value={formdata.description}
               onChange={handleChange}
             />
@@ -108,22 +168,38 @@ export default function CreatePost() {
               label="Desired Interest"
               name="interest"
               autoFocus
-              type='text'
+              type="text"
               value={formdata.interest}
               onChange={handleChange}
             />
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
               id="Time Period"
-              label="How long will you take it to return it ?"
+              label="How many months will you take to return money?"
               name="period"
               autoFocus
-              type='text'
+              type="text"
               value={formdata.period}
               onChange={handleChange}
-            />
+            /> */}
+                    <TextField
+          id="outlined-select-currency"
+          select
+          label="Period"
+          name="period"
+          helperText="How many months will you take to return the money?"
+          fullWidth
+          value={formdata.period}
+          onChange={handleChange}
+        >
+          {currencies.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
 
             <Button
               type="submit"
@@ -133,7 +209,6 @@ export default function CreatePost() {
             >
               Create Post
             </Button>
-
           </Box>
         </Box>
       </Container>

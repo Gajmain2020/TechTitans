@@ -129,6 +129,7 @@ function ResponsiveDrawer(props) {
               <ListItemText>Bookmarks</ListItemText>
             </ListItemButton>
           </ListItem>
+          <Link to='/message'>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -137,6 +138,7 @@ function ResponsiveDrawer(props) {
               <ListItemText>Messages</ListItemText>
             </ListItemButton>
           </ListItem>
+          </Link>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -442,6 +444,7 @@ function SideBarforSearch(props) {
               <ListItemText>Bookmarks</ListItemText>
             </ListItemButton>
           </ListItem>
+          <Link to='/message' >
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -450,6 +453,7 @@ function SideBarforSearch(props) {
               <ListItemText>Messages</ListItemText>
             </ListItemButton>
           </ListItem>
+          </Link>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
