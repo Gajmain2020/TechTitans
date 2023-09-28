@@ -145,6 +145,7 @@ function ResponsiveDrawer(props) {
               <ListItemText>Dashboard</ListItemText>
             </ListItemButton>
           </ListItem>
+          <Link to='/createpost'>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -153,6 +154,7 @@ function ResponsiveDrawer(props) {
               <ListItemText>Create Post</ListItemText>
             </ListItemButton>
           </ListItem>
+          </Link>
       </List>
       {/* <Divider />
       <List>
@@ -456,6 +458,7 @@ function SideBarforSearch(props) {
               <ListItemText>Dashboard</ListItemText>
             </ListItemButton>
           </ListItem>
+          <Link to='/createpost' >
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -464,6 +467,7 @@ function SideBarforSearch(props) {
               <ListItemText>Create Post</ListItemText>
             </ListItemButton>
           </ListItem>
+          </Link>
       </List>
       {/* <Divider />
       <List>
