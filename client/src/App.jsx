@@ -1,4 +1,5 @@
 import "./index.css";
+import "./App.css";
 // import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 // import Post from "./components/Post";
@@ -15,13 +16,11 @@ import CreatePost from "./components/CreatePost/CreatePost";
 
 import Message from "./Message";
 
-
 function App() {
   return (
     <>
       {/* <Navbar /> */}
       {/* <div className="container flex justify-center mb-10 mx-auto w-3/4 "> */}
-
 
       <Routes>
         <Route path="/" element={<Homepage />} />
