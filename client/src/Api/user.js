@@ -2,7 +2,7 @@ import axios from "axios";
 
 const URL = "http://localhost:3002/api/user";
 
-export async function sighUpUser(data) {
+export async function signUpUser(data) {
   try {
     const response = await axios({
       url: URL + "/signup",
@@ -11,6 +11,6 @@ export async function sighUpUser(data) {
     });
     return response.data;
   } catch (error) {
-    return error.response.message;
+    return error.response.data;
   }
 }

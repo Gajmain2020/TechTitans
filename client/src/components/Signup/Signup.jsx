@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { sighUpUser } from "../../Api/user";
+import { signUpUser } from "../../Api/user";
 
 function Copyright(props) {
   return (
@@ -131,7 +131,6 @@ export default function SignUp() {
   function checkboxClicked() {
     // Get the checkbox element by its ID
     let checkbox = document.getElementById("checkbox");
-    // const { pan, aadhar, ...form1 } = formValues;
     // Check if the checkbox is checked
     if (checkbox.checked) {
       setIsChecked(true);
@@ -144,10 +143,13 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
-    sighUpUser(formValues)
+    signUpUser(formValues)
       .then((res) => {
-        console.log(res);
+        if (res.success === false) {
+          alert(res.message);
+          return;
+        }
+        navigate(`/content/${res.id}`);
       })
       .catch((err) => console.log(err));
   };
