@@ -12,13 +12,17 @@ import PostOpen from "./PostOpen";
 import Notifications from "./Notifications";
 import Search from "./Search";
 import CreatePost from "./components/CreatePost/CreatePost";
+
 import Message from "./Message";
+
 
 function App() {
   return (
     <>
       {/* <Navbar /> */}
       {/* <div className="container flex justify-center mb-10 mx-auto w-3/4 "> */}
+
+
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/signin" element={<SignIn />} />
@@ -34,6 +38,7 @@ function App() {
         <Route path="/message" element={<Message />} />
         <Route path="/message/:userid" element={<Message />} />
       </Routes>
+
       {/* </div> */}
     </>
   );
