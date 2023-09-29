@@ -14,3 +14,16 @@ export async function signUpUser(data) {
     return error.response.data;
   }
 }
+
+export async function loginUser(data) {
+  try {
+    const response = await axios({
+      url: URL + "/login",
+      method: "POST",
+      data,
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+}
