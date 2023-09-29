@@ -4,7 +4,7 @@ const reqString = { type: String, required: true };
 
 const userSchema = mongoose.Schema({
   name: reqString,
-  email: { ...reqString, unique: true },
+  email: reqString,
   password: reqString,
   mobile: reqString,
   proofs: {
@@ -32,6 +32,13 @@ const userSchema = mongoose.Schema({
       interest: String,
       amount: String,
       period: String,
+    },
+  ],
+  notification: [
+    {
+      notificationType: String,
+      notificationText: String,
+      seen: { type: Boolean, default: false },
     },
   ],
   createdAt: { type: Date, default: new Date() },
