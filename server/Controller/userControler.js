@@ -7,7 +7,6 @@ import Complaints from "../Models/complaints.js";
 export const signupUser = async (req, res) => {
   try {
     const userData = req.body;
-    console.log(req.body);
     const isUserSignedUp = await User.findOne({ email: userData.email });
     if (isUserSignedUp) {
       return res.status(403).json({
@@ -19,7 +18,7 @@ export const signupUser = async (req, res) => {
     const hashAadhar = await bcrypt.hash(userData.aadhar, 8);
     const hashPan = await bcrypt.hash(userData.pan, 8);
 
-    await User.create({
+    const user = await User.create({
       name: userData.name,
       email: userData.email,
       password: hashPassword,
@@ -31,7 +30,12 @@ export const signupUser = async (req, res) => {
       borrowings: [],
       lending: [],
     });
+    const token = jwt.sign({ name: user.name, id: user._id }, "PRIVATE_KEY", {
+      expiresIn: "1h",
+    });
     return res.status(200).json({
+      id: user._id,
+      token,
       message: "User Signed Up Successfully",
       success: true,
     });
