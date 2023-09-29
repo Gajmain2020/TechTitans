@@ -12,6 +12,9 @@ import PostOpen from "./PostOpen";
 import Notifications from "./Notifications";
 import Search from "./Search";
 import CreatePost from "./components/CreatePost/CreatePost";
+import AboutUs from "./components/Pages/AboutUs";
+import ContactUs from "./components/Pages/ContactUs";
+import Help from "./components/Pages/Help";
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
       {/* <div className="container flex justify-center mb-10 mx-auto w-3/4 "> */}
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/help" element={<Help />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/content" element={<Content />} />

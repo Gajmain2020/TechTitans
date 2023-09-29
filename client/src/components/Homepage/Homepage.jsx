@@ -1,25 +1,13 @@
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+
+import HomeBG from "../../images/Desktop-1.png"
+import "./Home.css";
 
 function Homepage() {
-  const navigate = useNavigate();
   return (
-    <div>
-      <div className="text-2xl flex flex-col gap-4 w-full">
-        This will be homepage
-        <Button variant="contained" onClick={() => navigate("/signin")}>
-          Login
-        </Button>
-        <Button
-          variant="outlined"
-          color="warning"
-          onClick={() => navigate("/signup")}
-        >
-          Signup
-        </Button>
-      </div>
+    <div className='nav'>
+      
+      <img src={HomeBG} alt="not found" style={{width : '105%'}} />
     </div>
   );
 }
-
 export default Homepage;
