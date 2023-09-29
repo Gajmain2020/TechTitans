@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  background-color: #bca37f88;
+  padding: 0;
+}
+
+.hello {
+  border: solid 2px red;
+}
