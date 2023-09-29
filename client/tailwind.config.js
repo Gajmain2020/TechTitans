@@ -8,6 +8,7 @@ export default {
       md: "768px",
       lg: "1024px",
     },
+
     colors: {
       primary: "#071952",
       textPrimary: "#001524",
@@ -18,6 +19,7 @@ export default {
       textlightmode: "#000000",
       textdarkmode: "#FFFFFF",
       borderLight: "#F1F0E8",
+
     },
     fontFamily: {
       text: ["Roboto", "sans-serif"],

@@ -185,7 +185,6 @@ export default function CreatePost() {
               onChange={handleChange}
             /> */}
                     <TextField
-          id="outlined-select-currency"
           select
           label="Period"
           name="period"

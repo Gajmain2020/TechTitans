@@ -59,14 +59,14 @@ function Post(props) {
     console.log(replyRef.current.value);
   }
 
-  function handleChange() {
-    console.log(`render ${replyRef.current.value}`);
-    if (replyRef.current.value != null) {
-      setIsDisabled(false);
-    } else if (replyRef.current.value == null) {
-      setIsDisabled(true);
-    }
-  }
+  // function handleChange() {
+  //   console.log(`render ${replyRef.current.value}`);
+  //   if (replyRef.current.value != null) {
+  //     setIsDisabled(false);
+  //   } else if (replyRef.current.value == null) {
+  //     setIsDisabled(true);
+  //   }
+  // }
 
   function CommentModal() {
     return (
