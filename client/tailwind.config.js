@@ -20,6 +20,7 @@ export default {
       textlightmode: '#000000',
       textdarkmode: '#FFFFFF',
       borderLight:  '#F1F0E8',
+      red: '#FF0000',
     },
     fontFamily:{
       text: ['Roboto', 'sans-serif'],

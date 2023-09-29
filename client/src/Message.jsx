@@ -7,12 +7,46 @@ import Timeline from "./components/Timeline/Timeline";
 import {Link} from 'react-router-dom'
 import ProfileCard from './components/ProfileCard/ProfileCard';
 import MessageCard from './components/MessageCard/MessageCard';
+import { useState } from 'react';
+import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Search from '@mui/icons-material/Search';
 
 const Message = () => {
+
+  const messages  = [{
+    id:'1',
+    msg:'Hello'},
+    {id:'2',
+    msg:'nice'},
+    {id:'1',
+    msg:'verynice'},
+  ]
+
+
+  const changeView1 = useRef(null);
+  const changeView2 = useRef(null);
+
+  const params = useParams();
+  const {userid} = params;
+
+
+  function handleClick() {
+    changeView1.current.className = " flex flex-col md:h-full p-2 pt-24 md:w-[30%] gap-2  xsm:hidden sm:flex md:flex"
+    changeView2.current.className = "w-full p-2 pt-24"
+  }
+
+  function handleBack() {
+    changeView1.current.className = "flex flex-col h-full p-2 pt-24 xsm:w-full md:w-[30%] gap-2"
+    changeView2.current.className = "w-full p-2 pt-24 xsm:hidden  sm:hidden md:flex "
+  }
+  
+
   return (
     <div className="flex gap-2">
     <SideBar />
-    <div className=" flex flex-col h-full p-2 pt-24 xsm:w-full md:w-[30%] gap-2">
+    <div className="flex flex-col h-full p-2 pt-24 xsm:w-full md:w-[30%] gap-2" ref={changeView1}>
         <div>
     <form>   
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -28,17 +62,49 @@ const Message = () => {
     </form>
     </div>
     <div className='h-full'>
-      <Link to='/message/1234'><ProfileCard /></Link>
+      <Link to='/message/1234'><button className='w-full' onClick={handleClick} ><ProfileCard /></button></Link>
       <ProfileCard />
       <ProfileCard />
       <ProfileCard />
       </div>
     </div>
-    <div className="w-full p-2 pt-24">
-        <MessageCard />
+    <div className="w-full p-2 pt-24 xsm:hidden  sm:hidden md:block " ref={changeView2}>
+      {/* <MessageCard /> */}
+      <div className=" w-full flex flex-col bg-background_posts_hover rounded-md">
+      <div>
+        {!userid ? (
+          <>
+            <Search />
+            <p className="font-extrabold">Find people to message...</p>
+          </>
+        ) : (
+          <div className='flex flex-col gap-2 w-full'>
+            <div className=' p-2 h-10 w-full gap-10 flex items-start'>
+              <Link to='/message' >
+                <button onClick={handleBack}>
+              <ArrowBackIcon />
+              </button>
+              </Link>
+              <p className='font-bold'>
+                  Name
+              </p>
+            </div>
+            <div className='h-full flex flex-col bg-background justify-end'>
+                {messages.map((message)=>
+                   (<div className='w-full'>
+                   {message.id==='1'? (<p className='w-full justify-end flex'>{message.msg}</p>) : (<p className='w-full justify-start flex'>{message.msg}</p> )}
+                    </div>) 
+      )}
+
+                    
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
     </div>
   </div>
   )
 }
 
-export default Message
+export default Message;
