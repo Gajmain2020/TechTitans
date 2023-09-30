@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+
 import { loginUser } from "../../Api/user";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -33,11 +33,13 @@ export default function SignIn() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <div className="flex h-screen justify-center items-center " style={{ backgroundColor: "#DBCDBA"}} >
+    {/* <Container component="main" maxWidth="xs"   style={{ backgroundColor: "#BBB2A6", padding:"20px 20px 20px 20px ", }}> */}
+    <div className="p-10 rounded-2xl " style={{ backgroundColor: "#BBB2A6"}}>
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
+          marginTop:0,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -86,6 +88,8 @@ export default function SignIn() {
           </Grid>
         </div>
       </Box>
-    </Container>
+      </div>
+    {/* </Container> */}
+    </div>  
   );
 }

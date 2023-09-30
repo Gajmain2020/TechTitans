@@ -16,6 +16,8 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import Message from "./Message";
 import Activity from "./Activity";
 import Bookmarks from "./Bookmarks";
+import AboutUs from "./components/Pages/AboutUs";
+import ContactUs from "./components/Pages/ContactUs";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/content/:id" element={<Content />} />
