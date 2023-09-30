@@ -7,10 +7,9 @@ const userSchema = mongoose.Schema({
   email: reqString,
   password: reqString,
   mobile: reqString,
-  proofs: {
-    pan: reqString,
-    aadhar: reqString,
-  },
+  processed: { type: Boolean, default: false },
+  reffral: String,
+  urn: String,
   borrowings: [
     {
       borrowingId: String,

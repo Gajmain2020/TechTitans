@@ -33,7 +33,7 @@ const PostOpen = () => {
       { commenter: user.name, commenterId: user.id, comment },
     ]);
 
-    addComment(comment, user.id, user.name)
+    addComment(comment, user.id, user.name, postData._id)
       .then((res) => alert(res.message))
       .catch((err) => alert(err.message));
   }
@@ -43,7 +43,7 @@ const PostOpen = () => {
       <SideBar />
 
       <div className=" flex flex-col mt-20 xsm:w-full md:w-[50%] ">
-        {postData && <PostDetails postData={postData} />}
+        {postData ? <PostDetails postData={postData} /> : <>Loading</>}
 
         {/* DESIGN THIS */}
         <div className="mt-10">

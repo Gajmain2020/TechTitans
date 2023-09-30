@@ -63,6 +63,20 @@ export const postRequirement = async (req, res) => {
   }
 };
 
+export const fetchSinglePost = async (req, res) => {
+  try {
+    const post = await Borrower.findById(req.query.id);
+    return res
+      .status(200)
+      .json({ post, message: "Post sent successfully.", success: true });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal Server Error. Please try again",
+      success: false,
+    });
+  }
+};
+
 // ! to get only 20 posts will be sent to frontend at once
 export const fetchPostsInitially = async (req, res) => {
   try {
@@ -94,7 +108,7 @@ export const fetchPostsInitially = async (req, res) => {
 
 export const postComment = async (req, res) => {
   try {
-    const postId = isValidObjectId(req.query.postId);
+    const postId = isValidObjectId(req.query.id);
 
     if (!postId) {
       return res
@@ -102,22 +116,22 @@ export const postComment = async (req, res) => {
         .json({ message: "Invalid Post Id.", success: false });
     }
 
-    const post = await Borrower.findById(req.query.postId);
+    const post = await Borrower.findById(req.query.id);
 
     if (!post) {
       return res
         .status(404)
         .json({ message: "Post Not Found...", success: false });
     }
-    const { comment } = req.body;
+    const { comment, name, id } = req.body;
 
-    const user = jwt.decode(req.headers.cookie.split("=")[1]);
+    // const user = jwt.decode(req.headers.cookie.split("=")[1]);
 
     post.comments = [
       ...post.comments,
       {
-        commenter: user.name,
-        commenterId: user.id,
+        commenter: name,
+        commenterId: id,
         comment,
       },
     ];

@@ -39,3 +39,15 @@ export async function fetchPost() {
     return error.response.data;
   }
 }
+
+export async function fetchRequests() {
+  try {
+    const response = await axios({
+      url: "http://localhost:3002/api/user/fetch-requests",
+      method: "GET",
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+}

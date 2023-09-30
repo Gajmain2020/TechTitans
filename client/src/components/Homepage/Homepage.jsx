@@ -44,10 +44,21 @@ function Homepage() {
           <Button
             onClick={() => navigate("/signup")}
             variant="outlined"
-            color="warning"
+            color="secondary"
             fullWidth
           >
             Sign - up
+          </Button>
+          <hr />
+          <span className="text-center">OR</span>
+          <hr />
+          <Button
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            onClick={() => navigate("/login-faculty")}
+          >
+            Login Faculty
           </Button>
         </div>
       </div>

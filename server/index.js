@@ -40,26 +40,6 @@ app.use("/api/borrower", borrowerRoutes);
 app.use("/api/lender", lenderRoutes);
 app.use("/api/user", userRoutes);
 
-io.on("connection", (socket) => {
-  console.log("socket.io connection established.");
-
-  socket.on("setup", (user) => {
-    socket.join(user.data.id);
-    socket.emit("connected");
-  });
-  socket.on("newMessage", (newMessage) => {
-    var chat = newMessage.chat;
-    if (!chat.users) {
-      return console.log("chat.users not defined.");
-    }
-    chat.users.forEach((user) => {
-      if (user.id == newMessage.sender.id) return;
-
-      socket.in(user.id).emit("message received", newMessageReceived);
-    });
-  });
-});
-
 server.listen(PORT, () => {
   console.log(`Server is running on :: http://localhost:${PORT}`);
 });
