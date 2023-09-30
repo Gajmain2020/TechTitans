@@ -16,8 +16,12 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import Message from "./Message";
 import Activity from "./Activity";
 import Bookmarks from "./Bookmarks";
+
 import AboutUs from "./components/Pages/AboutUs";
 import ContactUs from "./components/Pages/ContactUs";
+
+import Complaint  from './components/Complaint/Complaint'
+
 
 function App() {
   return (
@@ -42,7 +46,8 @@ function App() {
         <Route path="/message" element={<Message />} />
         <Route path="/message/:userid" element={<Message />} />
         <Route path="activity/:userid" element={<Activity />} />
-        <Route path="bookmarks/:userid" element={<Bookmarks />} />
+        <Route path="/bookmarks/:userid" element={<Bookmarks />} />
+        <Route path="/complaint" element={<Complaint />} />
       </Routes>
 
       {/* </div> */}
