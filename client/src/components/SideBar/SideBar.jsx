@@ -224,7 +224,7 @@ function ResponsiveDrawer(props) {
             >
               <Link to={"/profile/" + `${user.id}`}>
                 <MenuItem onClick={handleClose}>
-                  <AccountCircleIcon />
+                <AccountCircleIcon />
                   Profile
                 </MenuItem>
               </Link>

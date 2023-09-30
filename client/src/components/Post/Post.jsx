@@ -15,7 +15,7 @@ import { fetchSinglePost } from "../../Api/borrower";
 function stringToColor(string) {
   let hash = 0;
   let i;
-
+  
   /* eslint-disable no-bitwise */
   for (i = 0; i < string.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);

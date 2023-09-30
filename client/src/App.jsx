@@ -21,6 +21,7 @@ import AboutUs from "./components/Pages/AboutUs";
 import ContactUs from "./components/Pages/ContactUs";
 
 import Complaint from "./components/Complaint/Complaint";
+// import Test from "./Test";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="activity/:userid" element={<Activity />} />
         <Route path="/bookmarks/:userid" element={<Bookmarks />} />
         <Route path="/complaint" element={<Complaint />} />
+        {/* <Route path="/test" element={<Test />} /> */}
       </Routes>
 
       {/* </div> */}

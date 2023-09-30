@@ -35,7 +35,7 @@ export default function SignIn() {
   return (
     <div className="flex h-screen justify-center items-center " style={{ backgroundColor: "#DBCDBA"}} >
     {/* <Container component="main" maxWidth="xs"   style={{ backgroundColor: "#BBB2A6", padding:"20px 20px 20px 20px ", }}> */}
-    <div className="p-10 rounded-2xl " style={{ backgroundColor: "#BBB2A6"}}>
+    <div className="p-10 rounded-2xl" style={{ backgroundColor: "#BBB2A6"}}>
       <CssBaseline />
       <Box
         sx={{
