@@ -1,28 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "../../Api/user";
 
 export default function SignUp() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("data")) {
+      console.log("hello");
+      navigate("/content/" + JSON.parse(localStorage.getItem("data")).id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const InitialValuesofForm = {
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
     mobile: "",
-    pan: "",
-    aadhar: "",
+    reffral: "",
+    urn: "",
   };
 
   const InitialFormErrors = {
@@ -37,36 +41,26 @@ export default function SignUp() {
     passwordErr: { status: false, value: "" },
     confirmPasswordErr: { status: false, value: "" },
     mobileErr: { status: false, value: "" },
-    panErr: { status: false, value: "" },
-    aadharErr: { status: false, value: "" },
+    urn: "",
+    reffral: "",
   };
 
-  const [form, setForm] = useState(0);
   const [formValues, setFormValues] = useState(InitialValuesofForm);
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
   const [formErrors, setFromErrors] = useState(InitialFormErrors);
   const [warning, setWarning] = useState("");
 
   // eslint-disable-next-line no-unused-vars
   const handleClick = (e) => {
     if (
-      isChecked &&
       !formErrors.nameErr.status &&
       !formErrors.emailErr.status &&
       !formErrors.passwordErr.status &&
       !formErrors.confirmPasswordErr.status &&
       !formErrors.mobileErr.status
     ) {
-      setForm(1);
-    } else {
       setWarning("Please fill the form correctly!");
     }
   };
-  function handleBack() {
-    setForm(form - 1);
-    setIsChecked(true);
-  }
 
   const handleChangeName = (e) => {
     const { name, value } = e.target;
@@ -95,29 +89,6 @@ export default function SignUp() {
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleChangePan = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleChangeAadhar = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
-  };
-
-  function checkboxClicked() {
-    // Get the checkbox element by its ID
-    let checkbox = document.getElementById("checkbox");
-    // Check if the checkbox is checked
-    if (checkbox.checked) {
-      setIsChecked(true);
-      setIsDisabled(false);
-    } else {
-      setIsChecked(false);
-      setIsDisabled(true);
-    }
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     signUpUser(formValues)
@@ -126,7 +97,7 @@ export default function SignUp() {
           alert(res.message);
           return;
         }
-        navigate(`/content/${res.id}`);
+        navigate(`/pending`);
       })
       .catch((err) => console.log(err));
   };
@@ -214,49 +185,44 @@ export default function SignUp() {
       });
     }
   }
-  function handleBlurPan() {
-    if (formValues.pan == "") {
-      setFromErrors({
-        ...formErrors,
-        panErr: { status: true, value: "Pan No. is Required" },
-      });
-    } else if (formValues.pan.length < 10 || formValues.pan.length > 10) {
-      setFromErrors({
-        ...formErrors,
-        panErr: { status: true, value: "Please enter a valid Pan no." },
-      });
-    } else {
-      setFromErrors({ ...formErrors, panErr: { status: false, value: "" } });
-    }
+
+  function handleUrnChange(e) {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
   }
-  function handleBlurAadhar() {
-    if (formValues.aadhar == "") {
-      setFromErrors({
-        ...formErrors,
-        aadharErr: { status: true, value: "Aadhar No. is Required" },
-      });
-    } else if (formValues.aadhar.length < 12 || formValues.aadhar.length > 12) {
-      setFromErrors({
-        ...formErrors,
-        aadharErr: { status: true, value: "Please enter a valid Aadhar no." },
-      });
-    } else {
-      setFromErrors({ ...formErrors, aadharErr: { status: false, value: "" } });
-    }
+  function handleRefferalChange(e) {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
   }
 
   return (
-    <div className="flex flex-col justify-center items-center  w-full" style={{ backgroundColor: "#DBCDBA" }}  >
-      <div className=" flex flex-col justify-center items-center md:w-[30%]  md:rounded-2xl p-10 " style={{ backgroundColor: '#BBB2A6' }}>
-      <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-      
-      <Typography component="h1" variant="h5" style={{ backgroundColor: '#BBB2A6' }} >
-        Sign Up
-      </Typography>
 
-      {/* form for name email password and mobile no. */}
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }} style={{ backgroundColor: '#BBB2A6' }} >
-        {form == 0 && (
+    <div
+      className="flex flex-col justify-center items-center  w-full"
+      style={{ backgroundColor: "#DBCDBA" }}
+    >
+      <div
+        className=" flex flex-col justify-center items-center md:w-[50%] md:rounded-2xl p-4 "
+        style={{ backgroundColor: "#BBB2A6" }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
+
+
+        <Typography
+          component="h1"
+          variant="h5"
+          style={{ backgroundColor: "#BBB2A6" }}
+        >
+          Sign Up
+        </Typography>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{ mt: 3 }}
+          style={{ backgroundColor: "#BBB2A6" }}
+        >
           <>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -329,8 +295,7 @@ export default function SignUp() {
                   fullWidth
                   name="mobile"
                   label="Mobile Number"
-                  type="text"
-                  id="mobileNo"
+                  type="number"
                   value={formValues.mobile}
                   onChange={handleChangeMobile}
                   onBlur={handleBlurMobile}
@@ -339,100 +304,47 @@ export default function SignUp() {
                 />
                 {/* <p className="text-red-900">{formErrors.mobile}</p> */}
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="urn"
+                  label="University Roll Number"
+                  type="number"
+                  value={formValues.urn}
+                  onChange={handleUrnChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="reffral"
+                  label="Reffral Number"
+                  type="number"
+                  value={formValues.reffral}
+                  onChange={handleRefferalChange}
+                />
+              </Grid>
               <Grid item xs={12}></Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="I agree"
-                      id="checkbox"
-                      color="primary"
-                      onClick={checkboxClicked}
-                      defaultChecked={isChecked}
-                    />
-                  }
-                  label="I agree to provide my Pan no. and Aadhar no."
-                />
-              </Grid>
             </Grid>
             <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <p className="text-red-900">{warning}</p>
               </Grid>
             </Grid>
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleClick}
-              disabled={isDisabled}
-            >
-              Next →
-            </Button>
           </>
-        )}
 
-        {/* form for pan no. and aadhar no. */}
-
-        {form == 1 && (
-          <>
-            <Container maxWidth="xs">
-              <Button onClick={handleBack}>← Back</Button>
-            </Container>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="pan"
-                  label="Pan Number"
-                  type="text"
-                  id="pan"
-                  value={formValues.pan}
-                  onChange={handleChangePan}
-                  onBlur={handleBlurPan}
-                  error={formErrors.panErr.status}
-                  helperText={formErrors.panErr.value}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="aadhar"
-                  label="Aadhar Number"
-                  type="text"
-                  id="aadhar"
-                  value={formValues.aadhar}
-                  onChange={handleChangeAadhar}
-                  onBlur={handleBlurAadhar}
-                  error={formErrors.aadharErr.status}
-                  helperText={formErrors.aadharErr.value}
-                />
-              </Grid>
-            </Grid>
-            <Grid container justifyContent="center" spacing={2}>
-              <Grid item>
-                <p className="text-red-900">{warning}</p>
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-          </>
-        )}
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Link href="/signin">Already have an account? Sign In</Link>
-          </Grid>
-        </Grid>
-      </Box>
-    </div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+        </Box>
+      </div>
     </div>
   );
 }

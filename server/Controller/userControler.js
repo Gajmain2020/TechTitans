@@ -3,6 +3,36 @@ import bcrypt from "bcryptjs";
 import Admin from "../Models/admin.js";
 import User from "../Models/user.js";
 import Complaints from "../Models/complaints.js";
+import Faculty from "../Models/faculty.js";
+
+export const fetchRequests = async (req, res) => {
+  try {
+    const users = await User.find({ processed: false });
+    return res
+      .status(200)
+      .json({ users, message: "data sent successfully", success: true });
+  } catch (error) {
+    return res.status(500).json({
+      message: "something went wrong. Please try again.",
+      success: false,
+    });
+  }
+};
+
+export const approveRequest = async (req, res) => {
+  try {
+    const userId = req.body.id;
+    const user = await User.findById(userId);
+    user.processed = true;
+    user.save();
+    return res.status(200).json({ message: "student approved", success: true });
+  } catch (error) {
+    return res.status(500).json({
+      message: "something went wrong. Please try again",
+      success: false,
+    });
+  }
+};
 
 export const signupUser = async (req, res) => {
   try {
@@ -15,29 +45,23 @@ export const signupUser = async (req, res) => {
       });
     }
     const hashPassword = await bcrypt.hash(userData.password, 10);
-    const hashAadhar = await bcrypt.hash(userData.aadhar, 8);
-    const hashPan = await bcrypt.hash(userData.pan, 8);
 
     const user = await User.create({
       name: userData.name,
       email: userData.email,
       password: hashPassword,
       mobile: userData.mobile,
-      proofs: {
-        pan: hashPan,
-        aadhar: hashAadhar,
-      },
+      urn: userData.urn,
+      reffral: userData.reffral,
       borrowings: [],
       lending: [],
     });
-    const token = jwt.sign({ name: user.name, id: user._id }, "PRIVATE_KEY", {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ name: user.name, id: user._id }, "PRIVATE_KEY");
     return res.status(200).json({
       id: user._id,
       token,
       name: user.name,
-      message: "User Signed Up Successfully",
+      message: "User Signed Up Successfully.",
       success: true,
     });
   } catch (error) {
@@ -46,6 +70,41 @@ export const signupUser = async (req, res) => {
       message: "Internal Server Error. Please try again later.",
       success: false,
     });
+  }
+};
+
+export const signupFaculty = async (req, res) => {
+  const user = await Faculty.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    reffrals: req.body.reffral,
+  });
+  return res
+    .status(200)
+    .json({ message: "user created successfully", success: true });
+};
+
+export const loginFaculty = async (req, res) => {
+  try {
+    const fact = await Faculty.findOne({ email: req.body.email });
+    if (!fact) {
+      return res
+        .status(404)
+        .json({ message: "User not found", success: false });
+    }
+    const passChk = fact.password === req.body.password;
+    if (passChk) {
+      return res.status(200).json({
+        message: "login successful",
+        success: true,
+        id: fact._id,
+        name: fact.name,
+      });
+    }
+    return res.status(403).json({ message: "Login failed.", success: false });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, success: false });
   }
 };
 
@@ -154,10 +213,7 @@ export const updateUserDetails = async (req, res) => {
 
     const token = jwt.sign(
       { name: oldUser.name, id: oldUser._id },
-      "PRIVATE_KEY",
-      {
-        expiresIn: "1h",
-      }
+      "PRIVATE_KEY"
     );
 
     return res.status(200).json({

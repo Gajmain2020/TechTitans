@@ -9,12 +9,20 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { loginUser } from "../../Api/user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function SignIn() {
   const navigate = useNavigate();
+
   const [user, setUser] = useState({ email: "", password: "" });
+
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      navigate("/");
+    }
+  }, []);
+
   function handleSubmit(e) {
     e.preventDefault();
     loginUser(user)
@@ -33,6 +41,7 @@ export default function SignIn() {
   }
 
   return (
+
     <div className="flex h-screen justify-center items-center " style={{ backgroundColor: "#DBCDBA"}} >
     {/* <Container component="main" maxWidth="xs"   style={{ backgroundColor: "#BBB2A6", padding:"20px 20px 20px 20px ", }}> */}
     <div className="p-10 rounded-2xl" style={{ backgroundColor: "#BBB2A6"}}>
@@ -84,12 +93,12 @@ export default function SignIn() {
           <Grid container>
             <Grid item>
               <Link href="/signup">{"Don't have an account? Sign Up"}</Link>
+
             </Grid>
-          </Grid>
-        </div>
-      </Box>
+          </div>
+        </Box>
       </div>
-    {/* </Container> */}
-    </div>  
+      {/* </Container> */}
+    </div>
   );
 }

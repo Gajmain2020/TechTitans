@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import "./index.css";
 // import Footer from "./components/Footer/Footer";
-import Post from "./components/Post/Post";
 import SideBar from "./components/SideBar/SideBar";
 import Timeline from "./components/Timeline/Timeline";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,39 +13,26 @@ import CommentIcon from "@mui/icons-material/Comment";
 export default function Content() {
   const [data, setData] = useState("");
 
-  // const arrayOfObjects = [
-  //   { id: 1, name: 'Alice' },
-  //   { id: 2, name: 'Bob' },
-  //   { id: 3, name: 'Charlie' },
-  // ];
-
-  // arrayOfObjects.map((obj) => console.log(obj.name));
-
   useEffect(() => {
     fetchPost().then((res) => setData(res.posts));
   }, []);
-
-  console.log(data);
 
   return (
     <div className="flex">
       <SideBar />
       <div className=" flex flex-col mt-24 xsm:w-full md:w-[50%] ">
         {!data && <>Loading...</>}
+        {data && data.length === 0 && (
+          <> there is no post to show fot the time beging</>
+        )}
         {data &&
           data.map((dt) => (
             <div key={dt._id}>
-              <SinglePost dt={dt} />
-            </div>
-          ))}
-        {/* {data &&
-          data.post.map((dt) => (
-            <div key={dt._id}>
               <Link to={"/post/" + `${dt._id}`}>
-                <Post dt={dt} />
+                <SinglePost dt={dt} />
               </Link>
             </div>
-          ))} */}
+          ))}
       </div>
       <div className=" mt-24">
         <Timeline />

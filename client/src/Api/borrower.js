@@ -53,3 +53,16 @@ export async function addComment(comment, id, name, postId) {
     return error.response.data;
   }
 }
+
+export async function approveRequest(id) {
+  try {
+    const response = await axios({
+      url: `http://localhost:3002/api/user/approve-request`,
+      method: "post",
+      data: { id },
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+}
