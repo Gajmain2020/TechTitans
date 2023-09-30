@@ -1,8 +1,13 @@
-
+import NavBar from "../Navbar/Navbar"
 function ContactUs() {
   return (
     <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos perferendis aliquam nostrum asperiores praesentium voluptatibus dolore modi molestias nobis sequi sed deleniti fugiat recusandae fuga corporis tempore excepturi, adipisci nesciunt!
+    <NavBar />
+
+      <h1 className="font-bold flex flex-col m-4">Contact us</h1>
+     <div className="m-4">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam placeat nobis necessitatibus aut possimus corrupti velit enim consequatur et culpa, aperiam sed dolore, iure temporibus eaque impedit consectetur facilis dicta?
+     </div>
     </div>
   )
 }

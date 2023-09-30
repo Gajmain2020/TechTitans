@@ -246,14 +246,16 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex hello w-1/2">
+    <div className="flex flex-col justify-center items-center  w-full" style={{ backgroundColor: "#DBCDBA" }}  >
+      <div className=" flex flex-col justify-center items-center md:w-[50%] md:rounded-2xl p-4 " style={{ backgroundColor: '#BBB2A6' }}>
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-      <Typography component="h1" variant="h5">
+      
+      <Typography component="h1" variant="h5" style={{ backgroundColor: '#BBB2A6' }} >
         Sign Up
       </Typography>
 
       {/* form for name email password and mobile no. */}
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }} style={{ backgroundColor: '#BBB2A6' }} >
         {form == 0 && (
           <>
             <Grid container spacing={2}>
@@ -430,6 +432,7 @@ export default function SignUp() {
           </Grid>
         </Grid>
       </Box>
+    </div>
     </div>
   );
 }
