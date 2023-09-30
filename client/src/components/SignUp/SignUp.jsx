@@ -247,7 +247,7 @@ export default function SignUp() {
 
   return (
     <div className="flex flex-col justify-center items-center  w-full" style={{ backgroundColor: "#DBCDBA" }}  >
-      <div className=" flex flex-col justify-center items-center md:w-[50%] md:rounded-2xl p-4 " style={{ backgroundColor: '#BBB2A6' }}>
+      <div className=" flex flex-col justify-center items-center md:w-[30%]  md:rounded-2xl p-10 " style={{ backgroundColor: '#BBB2A6' }}>
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
       
       <Typography component="h1" variant="h5" style={{ backgroundColor: '#BBB2A6' }} >

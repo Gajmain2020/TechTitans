@@ -14,7 +14,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/base";
 
-const pages = ["AboutUs", "ContactUs", "Help"];
+const pages = ["AboutUs", "ContactUs" ];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -43,18 +43,18 @@ function NavBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
+              font: 'Montserrat',
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            Borrow Connect
+            Credit Connect
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -96,19 +96,18 @@ function NavBar() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
+              font:'sans-serif',
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            <Button>Borrower Connect</Button>
+            <Button>Credit Connect</Button>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {/* {pages.map((page) => (
@@ -126,9 +125,6 @@ function NavBar() {
             </Box>
             <Box sx={{ flexGrow: 0 }} style={{ marginRight: "1rem" }}>
               <Link to="/contact">Contact Us</Link>
-            </Box>
-            <Box sx={{ flexGrow: 0 }} style={{ marginRight: "1rem" }}>
-              <Link to="/help">Help</Link>
             </Box>
           </Box>
         </Toolbar>
