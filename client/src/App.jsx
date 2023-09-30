@@ -24,6 +24,7 @@ import ContactUs from "./components/Pages/ContactUs";
 import Complaint from "./components/Complaint/Complaint";
 import HomepageFaculty from "./components/Faculty/HomepageFaculty";
 
+
 function App() {
   return (
     <>
@@ -51,6 +52,7 @@ function App() {
         <Route path="activity/:userid" element={<Activity />} />
         <Route path="/bookmarks/:userid" element={<Bookmarks />} />
         <Route path="/complaint" element={<Complaint />} />
+        {/* <Route path="/test" element={<Test />} /> */}
       </Routes>
 
       {/* </div> */}

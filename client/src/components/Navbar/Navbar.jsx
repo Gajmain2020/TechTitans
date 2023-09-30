@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 
-const pages = ["AboutUs", "ContactUs", "Help"];
+const pages = ["AboutUs", "ContactUs" ];
 
 function NavBar() {
   const navigate = useNavigate();
@@ -41,11 +41,14 @@ function NavBar() {
             variant="h6"
             noWrap
             component="a"
+
             href="/"
+
             sx={{
+              font: 'Montserrat',
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              
               fontWeight: 700,
               letterSpacing: ".1rem",
               color: "inherit",
@@ -92,12 +95,14 @@ function NavBar() {
           </Box>
           <Typography
             variant="h5"
+
             onClick={() => navigate("/")}
+
             sx={{
+              font:'sans-serif',
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".1rem",
               color: "inherit",
@@ -112,9 +117,6 @@ function NavBar() {
             </Box>
             <Box sx={{ flexGrow: 0 }} style={{ marginRight: "1rem" }}>
               <Link to="/contact">Contact Us</Link>
-            </Box>
-            <Box sx={{ flexGrow: 0 }} style={{ marginRight: "1rem" }}>
-              <Link to="/help">Help</Link>
             </Box>
           </Box>
         </Toolbar>

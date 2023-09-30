@@ -1,17 +1,30 @@
-import NavBar from "../Navbar/Navbar"
+import NavBar from "../Navbar/Navbar";
 function AboutUs() {
   return (
     <div>
       <NavBar />
-      <p className="text-center text-2xl mt-4 font-bold">Our Mission</p>
-      <div className=" h-screen flex w-full md:justify-between pb-2 pl-2 pr-2 xsm:flex-col md:flex-row items-center">
-        <img src="https://www.poynter.org/wp-content/uploads/2019/03/shutterstock_446870920.jpg" alt="not found" className="w-[60vmin] h-[30vmin] p-2"/>
-        <p className="p-2">
-        Credit Connect is dedicated to providing accessible and responsible lending solutions to empower individuals and businesses on their financial journey.Our aim is to empower every individual to access stress-free loans without the need for collateral. Lenders can trust that their funds will be repaid seamlessly, without any hassle.
+      <div className=" h-screen flex flex-col gap-4 align-items q-full">
+        <div className="bg-background h-40  flex flex-col  justify-center  items-center gap-2">
+        <p className="text-4xl font-bold w-full text-center mb-4  flex justify-center items-center">
+          About Us
+        </p>
+
+        </div>
+        {/* <p className="p-2 mt-4 font-bold text-2xl tracking-wide w-full text-center">
+          Our Mission
+        </p> */}
+        <p className="p-2 mt-4 text-xl px-20 tracking-wide w-full text-center">
+        <p className="text-xl">          Welcome to Credit Connect, your trusted platform for peer-to-peer
+          lending and borrowing within our local college community.</p>
+        At Credit Connect, our mission is simple:
+          We understand the challenges that students face when it comes to
+          managing their finances. Whether it's unexpected expenses, buying
+          textbooks, or covering tuition fees, we believe that students should
+          have a reliable and convenient way to support each other financially.
         </p>
       </div>
     </div>
-  )
+  );
 }
 
-export default AboutUs
+export default AboutUs;

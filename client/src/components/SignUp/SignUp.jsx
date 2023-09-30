@@ -196,6 +196,7 @@ export default function SignUp() {
   }
 
   return (
+
     <div
       className="flex flex-col justify-center items-center  w-full"
       style={{ backgroundColor: "#DBCDBA" }}
@@ -205,6 +206,7 @@ export default function SignUp() {
         style={{ backgroundColor: "#BBB2A6" }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
+
 
         <Typography
           component="h1"
