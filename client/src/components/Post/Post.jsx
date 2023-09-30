@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
+import { useParams } from "react-router-dom";
 
 function stringToColor(string) {
   let hash = 0;
@@ -79,7 +80,7 @@ function Post(props) {
           </div>
           <div className="flex flex-col justify-start gap-2 px-2">
             <div className="h-full">
-              <Avatar {...stringAvatar(name)} />
+              {/* <Avatar {...stringAvatar(name)} /> */}
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="flex justify-start gap-2">
@@ -101,7 +102,7 @@ function Post(props) {
             <Box component="form" onSubmit={handleSubmit} noValidate>
               <div className="flex justify-start gap-2 px-2">
                 <div className="h-full">
-                  <Avatar {...stringAvatar(name)} />
+                  {/* <Avatar {...stringAvatar(name)} /> */}
                 </div>
                 <div className="w-full">
                   <p>
@@ -137,6 +138,9 @@ function Post(props) {
     );
   }
 
+  const params = useParams();
+  const data = params;
+
   return (
     <div className="w-full md:ml-20 flex">
       <Backdrop
@@ -152,7 +156,7 @@ function Post(props) {
       <div className="flex-col bg-background  hover:bg-background_posts_hover  h-auto pt-2 xsm:w-full flex gap-2">
         <div className="flex justify-start gap-2 px-2">
           <div className="h-full">
-            <Avatar {...stringAvatar(name)} />
+            {/* <Avatar {...stringAvatar(name)} /> */}
           </div>
           <div className="flex flex-col w-full items-start  gap-2">
             <div className="flex justify-start gap-2">
@@ -231,7 +235,7 @@ function PostOpened(props) {
           </div>
           <div className="flex flex-col justify-start gap-2 px-2">
             <div className="h-full">
-              <Avatar {...stringAvatar(name)} />
+              {/* <Avatar {...stringAvatar(name)} /> */}
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="flex justify-start gap-2">
@@ -253,7 +257,7 @@ function PostOpened(props) {
             <Box component="form" onSubmit={handleSubmit} noValidate>
               <div className="flex justify-start gap-2 px-2">
                 <div className="h-full">
-                  <Avatar {...stringAvatar(name)} />
+                  {/* <Avatar {...stringAvatar(name)} /> */}
                 </div>
                 <div className="w-full">
                   <p>
@@ -305,7 +309,7 @@ function PostOpened(props) {
         <div className="flex-col bg-background   h-auto pt-2 xsm:w-full flex gap-2">
           <div className="flex justify-start gap-2 px-2">
             <div className="h-full">
-              <Avatar {...stringAvatar(name)} />
+              {/* <Avatar {...stringAvatar(name)} /> */}
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="flex justify-start gap-2">
