@@ -10,7 +10,7 @@ const headers = {
 };
 
 export async function postRequirement(data) {
-  console.log(data);
+  console.log(headers);
   try {
     const response = await axios({
       headers,

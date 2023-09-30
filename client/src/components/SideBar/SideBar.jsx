@@ -1,50 +1,47 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 // import Post from "./Post/";
-import Post from "../Post/Post";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import Timeline from "../Timeline/Timeline";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import MessageIcon from "@mui/icons-material/Message";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import HandshakeIcon from "@mui/icons-material/Handshake";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import { Button } from "@mui/base";
 
 const drawerWidth = 200;
 
 function ResponsiveDrawer(props) {
+  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const user =
     localStorage.getItem("data") && JSON.parse(localStorage.getItem("data"));
-
+  if (!user) {
+    navigate("/");
+    return;
+  }
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -74,36 +71,7 @@ function ResponsiveDrawer(props) {
             </ListItemButton>
           </ListItem>
         </NavLink> */}
-        <ListItem disablePadding>
-          <NavLink to="/notifications">
-            <ListItemButton>
-              <ListItemIcon>
-                <NotificationsIcon />
-              </ListItemIcon>
-              <ListItemText>Notifications</ListItemText>
-            </ListItemButton>
-          </NavLink>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link to={"/activity/" + `${user.id}`}>
-            <ListItemButton>
-              <ListItemIcon>
-                <LibraryAddCheckIcon />
-              </ListItemIcon>
-              <ListItemText>Activity</ListItemText>
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link to={"/bookmarks/" + `${user.id}`}>
-            <ListItemButton>
-              <ListItemIcon>
-                <BookmarksIcon />
-              </ListItemIcon>
-              <ListItemText>Bookmarks</ListItemText>
-            </ListItemButton>
-          </Link>
-        </ListItem>
+
         {/* <Link to="/message">
           <ListItem disablePadding>
             <ListItemButton>
@@ -141,7 +109,6 @@ function ResponsiveDrawer(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const navigate = useNavigate();
 
   function handleLogout() {
     localStorage.removeItem("data");
@@ -186,6 +153,7 @@ function ResponsiveDrawer(props) {
                 <p className="font-bold">Credit Connect</p>
               </Typography>
 
+<<<<<<< HEAD
               {/* <Link to='/complaint' >
               <Button >
                 Complaint
@@ -197,6 +165,12 @@ function ResponsiveDrawer(props) {
               </Button>
               </Link> */}
               
+=======
+              <Link to="/complaint">
+                <Button>Complaint</Button>
+              </Link>
+              <Button>About Us</Button>
+>>>>>>> 1f2670835f765a69f4c52fbde6e2b25ea58521b4
             </div>
 
             <IconButton
@@ -226,7 +200,7 @@ function ResponsiveDrawer(props) {
             >
               <Link to={"/profile/" + `${user.id}`}>
                 <MenuItem onClick={handleClose}>
-                <AccountCircleIcon />
+                  <AccountCircleIcon />
                   Profile
                 </MenuItem>
               </Link>
@@ -323,16 +297,7 @@ function SideBarforSearch(props) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-        <ListItem disablePadding>
-          <NavLink to="/notifications">
-            <ListItemButton>
-              <ListItemIcon>
-                <NotificationsIcon />
-              </ListItemIcon>
-              <ListItemText>Notifications</ListItemText>
-            </ListItemButton>
-          </NavLink>
-        </ListItem>
+
         <ListItem disablePadding>
           <Link to={"/activity/" + `${user.id}`}>
             <ListItemButton>

@@ -12,6 +12,14 @@ import CommentIcon from "@mui/icons-material/Comment";
 import Avatar from "@mui/material/Avatar";
 
 export default function Content() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("data") === null) {
+      navigate("/");
+      return;
+    }
+  }, []);
   const [data, setData] = useState("");
 
   useEffect(() => {
@@ -35,9 +43,7 @@ export default function Content() {
             </div>
           ))}
       </div>
-      <div className=" mt-24">
-        <Timeline />
-      </div>
+      <div className=" mt-24">{/* <Timeline /> */}</div>
       <button className=" sm:hidden  bg-primary text-textdarkmode  fixed bottom-0 right-0 p-4 m-4 bg-blue-500 text-white rounded-full shadow-lg">
         Create Post
       </button>
@@ -94,7 +100,10 @@ function SinglePost({ dt }) {
                   </p>
                   <p>
                     Title:
-                    <span className="text-xl text-text"> {dt.title}</span>
+                    <span className="text-xl text-text">
+                      {" "}
+                      {dt.borrowingTitle}
+                    </span>
                   </p>
                 </div>
 
