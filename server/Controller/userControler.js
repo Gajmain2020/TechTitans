@@ -113,7 +113,6 @@ export const loginUser = async (req, res) => {
     const userData = req.body;
     const user = await User.findOne({ email: userData.email });
 
-    // checking if the email exists or not
     if (!user) {
       return res
         .status(404)
@@ -125,6 +124,7 @@ export const loginUser = async (req, res) => {
       userData.password,
       user.password
     );
+    console.log(isPasswordCorrect);
     if (!isPasswordCorrect) {
       return res
         .status(401)
