@@ -5,7 +5,8 @@ import { isValidObjectId } from "mongoose";
 
 export const postRequirement = async (req, res) => {
   try {
-    const userToken = req.headers.cookie.split("=")[1];
+    console.log(req.headers);
+    const userToken = req.headers.authorization.split(" ")[1];
     const userDecoded = jwt.decode(userToken);
     const postData = req.body;
     const published = await Borrower.findOne({

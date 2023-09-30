@@ -13,8 +13,9 @@ import PostOpen from "./PostOpen";
 import Notifications from "./Notifications";
 import Search from "./Search";
 import CreatePost from "./components/CreatePost/CreatePost";
-
 import Message from "./Message";
+import Activity from "./Activity";
+import Bookmarks from "./Bookmarks";
 
 function App() {
   return (
@@ -33,9 +34,11 @@ function App() {
         <Route path="/post/:name" element={<PostOpen />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/createpost/:id" element={<CreatePost />} />
         <Route path="/message" element={<Message />} />
         <Route path="/message/:userid" element={<Message />} />
+        <Route path="activity/:userid" element={<Activity />} />
+        <Route path="bookmarks/:userid" element={<Bookmarks />} />
       </Routes>
 
       {/* </div> */}

@@ -21,6 +21,7 @@ const Message = () => {
     },
     { id: "2", msg: "nice" },
     { id: "1", msg: "verynice" },
+    { id: "2", msg: "are bhai bhai!" },
   ];
 
   const changeView1 = useRef(null);

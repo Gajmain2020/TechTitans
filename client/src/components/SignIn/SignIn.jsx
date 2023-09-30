@@ -23,7 +23,10 @@ export default function SignIn() {
           alert(res.message);
           return;
         }
-        localStorage.setItem("authToken", JSON.stringify(res.token));
+        localStorage.setItem(
+          "data",
+          JSON.stringify({ authToken: res.token, name: res.name, id: res.id })
+        );
         navigate(`/content/${res.id}`);
       })
       .catch((err) => console.log(err));
