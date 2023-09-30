@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import Avatar from "@mui/material/Avatar";
@@ -9,7 +9,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { fetchSinglePost } from "../../Api/borrower";
 
 function stringToColor(string) {
   let hash = 0;
@@ -40,8 +41,8 @@ function stringAvatar(name) {
   };
 }
 
-function Post(props) {
-  const name = props.name;
+function Post() {
+  // const name = props.name;
   const [showCommentModal, SetShowCommentModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [isDisable, setIsDisabled] = useState(true);
@@ -49,7 +50,7 @@ function Post(props) {
   const replyRef = useRef(null);
 
   const user =
-  localStorage.getItem("data") && JSON.parse(localStorage.getItem("data"));
+    localStorage.getItem("data") && JSON.parse(localStorage.getItem("data"));
 
   function handleCommentButton() {
     SetShowCommentModal(true);
@@ -63,15 +64,6 @@ function Post(props) {
     console.log(replyRef.current.value);
   }
 
-  // function handleChange() {
-  //   console.log(`render ${replyRef.current.value}`);
-  //   if (replyRef.current.value != null) {
-  //     setIsDisabled(false);
-  //   } else if (replyRef.current.value == null) {
-  //     setIsDisabled(true);
-  //   }
-  // }
-
   function CommentModal() {
     return (
       <>
@@ -83,7 +75,7 @@ function Post(props) {
           </div>
           <div className="flex flex-col justify-start gap-2 px-2">
             <div className="h-full">
-            <Avatar>{props.borrowerName}</Avatar>
+              <Avatar>{props.borrowerName}</Avatar>
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="flex justify-start gap-2">
@@ -141,9 +133,6 @@ function Post(props) {
     );
   }
 
-  const params = useParams();
-  const data = params;
-
   return (
     <div className="w-full md:ml-20 flex">
       <Backdrop
@@ -159,7 +148,7 @@ function Post(props) {
       <div className="flex-col bg-background  hover:bg-background_posts_hover  h-auto pt-2 xsm:w-full flex gap-2">
         <div className="flex justify-start gap-2 px-2">
           <div className="h-full">
-          <Avatar>{props.borrowerName}</Avatar>
+            <Avatar>{user.borrowerName}</Avatar>
           </div>
           <div className="flex flex-col w-full items-start  gap-2">
             <div className="flex justify-start gap-2">
@@ -194,7 +183,7 @@ function Post(props) {
 }
 export default Post;
 
-function PostOpened(props) {
+function PostOpened() {
   const name = props.name;
   const [showCommentModal, SetShowCommentModal] = useState(false);
   const [open, setOpen] = useState(false);
@@ -202,6 +191,13 @@ function PostOpened(props) {
   const [reply, setReply] = useState("");
   const replyRef = useRef(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const postId = useLocation().pathname.split("/")[2];
+
+  useEffect(() => {
+    fetchSinglePost(postId)
+      .thne((res) => setPost(res.post))
+      .catch((err) => alert(err));
+  }, []);
 
   function handleCommentButton() {
     SetShowCommentModal(true);
@@ -212,7 +208,6 @@ function PostOpened(props) {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(replyRef.current.value);
   }
   function handleBookmark() {
     setIsBookmarked(!isBookmarked);
@@ -242,7 +237,7 @@ function PostOpened(props) {
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="flex justify-start gap-2">
-                <p className='text-sm font-bold'>{name}</p>
+                <p className="text-sm font-bold">{name}</p>
                 <p>
                   {"."}
                   {props.date}
@@ -286,7 +281,7 @@ function PostOpened(props) {
                   color="success"
                   onClick={handleSubmit}
                 >
-                  Reply
+                  Comment
                 </Button>
               </div>
             </Box>
@@ -316,7 +311,7 @@ function PostOpened(props) {
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="flex justify-start gap-2">
-                <p className='text-sm font-bold'>{name}</p>
+                <p className="text-sm font-bold">{name}</p>
                 <p>
                   {"."}
                   {props.date}
@@ -332,21 +327,14 @@ function PostOpened(props) {
           </div>
         </div>
         <div className="w-full text-borderLight border-b-2 h-1 mr-2"></div>
-              <div className="flex w-full justify-end gap-2 mr-2  bg-background  hover:bg-background_posts_hover ">
-                <IconButton
-                  aria-label="add to bookmark"
-                  onClick={handleBookmark}
-                >
-                  {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-                </IconButton>
-                <IconButton
-                  onClick={handleCommentButton}
-                  aria-label="add a comment"
-                >
-                  <CommentIcon />
-                </IconButton>
-              </div>
-
+        <div className="flex w-full justify-end gap-2 mr-2  bg-background  hover:bg-background_posts_hover ">
+          <IconButton aria-label="add to bookmark" onClick={handleBookmark}>
+            {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+          </IconButton>
+          <IconButton onClick={handleCommentButton} aria-label="add a comment">
+            <CommentIcon />
+          </IconButton>
+        </div>
       </div>
     </div>
   );

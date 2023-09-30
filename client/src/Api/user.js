@@ -34,7 +34,6 @@ export async function fetchPost() {
       url: URL + "/fetch-posts",
       method: "GET",
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     return error.response.data;

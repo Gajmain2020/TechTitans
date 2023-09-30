@@ -20,8 +20,7 @@ import Bookmarks from "./Bookmarks";
 import AboutUs from "./components/Pages/AboutUs";
 import ContactUs from "./components/Pages/ContactUs";
 
-import Complaint  from './components/Complaint/Complaint'
-
+import Complaint from "./components/Complaint/Complaint";
 
 function App() {
   return (
@@ -39,7 +38,6 @@ function App() {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/post/:id" element={<PostOpen />} />
         <Route path="/profile/:name" element={<Profile />} />
-        <Route path="/post/:name" element={<PostOpen />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/search" element={<Search />} />
         <Route path="/createpost/:id" element={<CreatePost />} />
