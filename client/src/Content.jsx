@@ -3,9 +3,12 @@ import "./index.css";
 import Post from "./components/Post/Post";
 import SideBar from "./components/SideBar/SideBar";
 import Timeline from "./components/Timeline/Timeline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchPost } from "./Api/user";
+import { format } from "date-fns";
+import { IconButton } from "@mui/material";
+import CommentIcon from "@mui/icons-material/Comment";
 
 export default function Content() {
   const [data, setData] = useState("");
@@ -15,34 +18,34 @@ export default function Content() {
   //   { id: 2, name: 'Bob' },
   //   { id: 3, name: 'Charlie' },
   // ];
-  
-  
+
   // arrayOfObjects.map((obj) => console.log(obj.name));
 
-
-    
-
   useEffect(() => {
-    fetchPost().then((res) => setData(res.posts))
+    fetchPost().then((res) => setData(res.posts));
   }, []);
-  
-  console.log(data)
+
+  console.log(data);
 
   return (
     <div className="flex">
       <SideBar />
       <div className=" flex flex-col mt-24 xsm:w-full md:w-[50%] ">
-        {data.map((data) => (
-          <div>
-          <Link to={"/post/" + `${data._id}`}>
-            <Post borrowerName={data.borrowerName} createdAt={data.createdAt} />
-          </Link>
-          </div>
-        ))} 
-
-        <Link to="/post/Divyanshi Srivastava">
-          <Post name="Divyanshi Srivastava" date="12 dec" />
-        </Link>
+        {!data && <>Loading...</>}
+        {data &&
+          data.map((dt) => (
+            <div key={dt._id}>
+              <SinglePost dt={dt} />
+            </div>
+          ))}
+        {/* {data &&
+          data.post.map((dt) => (
+            <div key={dt._id}>
+              <Link to={"/post/" + `${dt._id}`}>
+                <Post dt={dt} />
+              </Link>
+            </div>
+          ))} */}
       </div>
       <div className=" mt-24">
         <Timeline />
@@ -51,5 +54,73 @@ export default function Content() {
         Create Post
       </button>
     </div>
+  );
+}
+
+function SinglePost({ dt }) {
+  const navigate = useNavigate();
+  function handleCommentButton() {
+    console.log("hello", dt);
+    navigate(`/post/${dt._id}`);
+  }
+
+  function handleBookmark() {
+    console.log("data", dt);
+  }
+
+  return (
+    <>
+      <div className="w-full">
+        <div className="flex-col bg-background   h-auto pt-2 xsm:w-full flex gap-2">
+          <div className="flex justify-start gap-2 px-2">
+            <div className="h-full">
+              {/* <Avatar {...stringAvatar(name)} /> */}
+            </div>
+            <div className="flex flex-col w-full items-start  gap-2">
+              <div className="h-auto w-full flex flex-col">
+                <div>
+                  <p>
+                    Name:
+                    <span className="text-xl text-text">
+                      {" "}
+                      {dt.borrowerName}
+                    </span>
+                  </p>
+                  <p>
+                    Title:
+                    <span className="text-xl text-text"> {dt.title}</span>
+                  </p>
+                </div>
+
+                <p>
+                  Amount Required:
+                  <span className="text-xl text-text">
+                    {" "}
+                    {dt.amountRequired}
+                  </span>
+                </p>
+                <p>
+                  Intererst
+                  <span className="text-xl text-text"> {dt.interest}</span>
+                </p>
+                <p>
+                  Period
+                  <span className="text-xl text-text"> {dt.period}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-full text-borderLight border-b-2 h-1 mr-2"></div>
+        <div className="flex w-full justify-end gap-2 mr-2  bg-background  hover:bg-background_posts_hover ">
+          <IconButton aria-label="add to bookmark" onClick={handleBookmark}>
+            {/* {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />} */}
+          </IconButton>
+          <IconButton onClick={handleCommentButton} aria-label="add a comment">
+            <CommentIcon />
+          </IconButton>
+        </div>
+      </div>
+    </>
   );
 }
