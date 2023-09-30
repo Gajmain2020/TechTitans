@@ -186,12 +186,15 @@ function ResponsiveDrawer(props) {
                 <p className="font-bold">Credit Connect</p>
               </Typography>
 
-              <Button onClick={() => alert("navigate to complaint")}>
+              <Link to='/complaint' >
+              <Button >
                 Complaint
               </Button>
-              <Button onClick={() => alert("navigate to about us")}>
+              </Link>
+              <Button>
                 About Us
               </Button>
+              
             </div>
 
             <IconButton
