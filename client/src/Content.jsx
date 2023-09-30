@@ -35,7 +35,7 @@ export default function Content() {
         {data.map((data) => (
           <div>
           <Link to={"/post/" + `${data._id}`}>
-            <Post name={data.interest} date={data.createdAt} />
+            <Post borrowerName={data.borrowerName} createdAt={data.createdAt} />
           </Link>
           </div>
         ))} 

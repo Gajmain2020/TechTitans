@@ -48,6 +48,9 @@ function Post(props) {
   const [reply, setReply] = useState("");
   const replyRef = useRef(null);
 
+  const user =
+  localStorage.getItem("data") && JSON.parse(localStorage.getItem("data"));
+
   function handleCommentButton() {
     SetShowCommentModal(true);
     setOpen(true);
@@ -80,14 +83,14 @@ function Post(props) {
           </div>
           <div className="flex flex-col justify-start gap-2 px-2">
             <div className="h-full">
-              {/* <Avatar {...stringAvatar(name)} /> */}
+            <Avatar>{props.borrowerName}</Avatar>
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="flex justify-start gap-2">
                 <p>{name}</p>
                 <p>
                   {"."}
-                  {props.date}
+                  {props.createdAt}
                 </p>
               </div>
               <div className="h-auto w-full flex flex-col">
@@ -156,14 +159,14 @@ function Post(props) {
       <div className="flex-col bg-background  hover:bg-background_posts_hover  h-auto pt-2 xsm:w-full flex gap-2">
         <div className="flex justify-start gap-2 px-2">
           <div className="h-full">
-            {/* <Avatar {...stringAvatar(name)} /> */}
+          <Avatar>{props.borrowerName}</Avatar>
           </div>
           <div className="flex flex-col w-full items-start  gap-2">
             <div className="flex justify-start gap-2">
-              <p>{name}</p>
+              <p>{props.borrowerName}</p>
               <p>
                 {"."}
-                {props.date}
+                {props.createdAt}
               </p>
             </div>
             <div className="h-auto w-full flex flex-col">
