@@ -4,8 +4,16 @@ import Post from "./components/Post/Post";
 import SideBar from "./components/SideBar/SideBar";
 import Timeline from "./components/Timeline/Timeline";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchPost } from "./Api/user";
 
 export default function Content() {
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    fetchPost().then((res) => setData(res.posts));
+  }, []);
+
   return (
     <div className="flex">
       <SideBar />

@@ -6,6 +6,7 @@ import {
   updateUserDetails,
 } from "../Controller/userControler.js";
 import { userAuth } from "../Middleware/userAuthentication.js";
+import { fetchPostsInitially } from "../Controller/borrowerControler.js";
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ const router = express.Router();
 
 router.post("/signup", signupUser);
 router.post("/login", loginUser);
+router.get("/fetch-posts", fetchPostsInitially);
 router.post("/post-complaint", postComplaint);
 router.patch("/update-user-details", updateUserDetails);
 

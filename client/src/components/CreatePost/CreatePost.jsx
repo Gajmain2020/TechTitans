@@ -1,22 +1,16 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import Slider from '@mui/material/Slider';
-import MenuItem from '@mui/material/MenuItem';
-
-
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import MenuItem from "@mui/material/MenuItem";
+import { postRequirement } from "../../Api/borrower";
+import { useNavigate } from "react-router-dom";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -24,79 +18,82 @@ const defaultTheme = createTheme();
 
 const currencies = [
   {
-    value: '1',
-    label: '1 month'
+    value: "1",
+    label: "1 month",
   },
   {
-    value: '2',
-    label:  '2 months'
-
+    value: "2",
+    label: "2 months",
   },
   {
-    value: '3',
-    label: '3 months',
+    value: "3",
+    label: "3 months",
   },
   {
-    value: '4',
-    label: '4 months',
+    value: "4",
+    label: "4 months",
   },
   {
-    value: '5',
-    label: '6 month'
+    value: "5",
+    label: "6 month",
   },
   {
-    value: '6',
-    label:  '6 months'
-
+    value: "6",
+    label: "6 months",
   },
   {
-    value: '7',
-    label: '7 months',
+    value: "7",
+    label: "7 months",
   },
   {
-    value: '8',
-    label: '8 months',
+    value: "8",
+    label: "8 months",
   },
   {
-    value: '9',
-    label: '9 month'
+    value: "9",
+    label: "9 month",
   },
   {
-    value: '10',
-    label:  '10 months'
-
+    value: "10",
+    label: "10 months",
   },
   {
-    value: '11',
-    label: '11 months',
+    value: "11",
+    label: "11 months",
   },
   {
-    value: '12',
-    label: '12 months',
+    value: "12",
+    label: "12 months",
   },
 ];
 
 export default function CreatePost() {
+  const navigate = useNavigate();
+  const InitialFormData = {
+    title: "",
+    amount: "",
+    description: "",
+    interest: "",
+    period: "",
+  };
 
-    const InitialFormData ={
-        title:"",
-        amount:"",
-        description:"",
-        interest:"",
-        period:"",
-    }
+  const [formdata, setFormdata] = React.useState(InitialFormData);
 
-    const [formdata, setFormdata] = React.useState(InitialFormData);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormdata({...formdata, [name]: value })
-    }
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormdata({ ...formdata, [name]: value });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formdata);
+    postRequirement(formdata).then((res) => {
+      if (!res.status) {
+        alert(res.message);
+        return;
+      }
+      alert(res.message);
+      navigate(-1);
+    });
   };
 
   return (
@@ -184,21 +181,21 @@ export default function CreatePost() {
               value={formdata.period}
               onChange={handleChange}
             /> */}
-                    <TextField
-          select
-          label="Period"
-          name="period"
-          helperText="How many months will you take to return the money?"
-          fullWidth
-          value={formdata.period}
-          onChange={handleChange}
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+            <TextField
+              select
+              label="Period"
+              name="period"
+              helperText="How many months will you take to return the money?"
+              fullWidth
+              value={formdata.period}
+              onChange={handleChange}
+            >
+              {currencies.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
 
             <Button
               type="submit"

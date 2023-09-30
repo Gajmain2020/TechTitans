@@ -36,6 +36,7 @@ export const signupUser = async (req, res) => {
     return res.status(200).json({
       id: user._id,
       token,
+      name: user.name,
       message: "User Signed Up Successfully",
       success: true,
     });
@@ -71,14 +72,13 @@ export const loginUser = async (req, res) => {
         .json({ message: "Invalid username or password.", success: false });
     }
 
-    const token = jwt.sign({ name: user.name, id: user._id }, "PRIVATE_KEY", {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ name: user.name, id: user._id }, "PRIVATE_KEY");
 
     return res.cookie("token", token).status(200).json({
       message: "Login Successful...",
       id: user._id,
-      authToken: token,
+      token: token,
+      name: user.name,
       success: true,
     });
   } catch (error) {
@@ -161,7 +161,7 @@ export const updateUserDetails = async (req, res) => {
     );
 
     return res.status(200).json({
-      authToken: token,
+      token: token,
       message: "User updated successfully.",
       success: true,
     });
