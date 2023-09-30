@@ -9,6 +9,7 @@ import { fetchPost } from "./Api/user";
 import { format } from "date-fns";
 import { IconButton } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
+import Avatar from "@mui/material/Avatar";
 
 export default function Content() {
   const [data, setData] = useState("");
@@ -57,11 +58,29 @@ function SinglePost({ dt }) {
 
   return (
     <>
-      <div className="w-full">
+      {" "}
+      <div className="flex-col gap-10 m-2 xsm:mx-2 p-1 border-2 border-icons rounded-xl">
+        <div className="flex flex-col w-full h-auto gap-2">
+          <div className="bg-postHeader font-bold p-2 rounded-lg text-background">Title</div>
+          <div className="flex  gap-4">
+            <div className="h-full w-auto">
+              <Avatar>G</Avatar>
+            </div>
+            <div className="flex flex-col w-full">
+              <div>Username</div>
+              <div>Amount</div>
+              <div>Interest</div>
+            </div>
+          </div>
+          <div className='border-b-2 border-dashed border-icons'></div>
+          <div className="flex justify-end items-center"><button className="bg-postHeader p-2 rounded-lg">Comment</button></div>
+        </div>
+      </div>
+      {/* <div className="w-full">
         <div className="flex-col bg-background   h-auto pt-2 xsm:w-full flex gap-2">
           <div className="flex justify-start gap-2 px-2">
             <div className="h-full">
-              {/* <Avatar {...stringAvatar(name)} /> */}
+              <Avatar {...stringAvatar(name)} />
             </div>
             <div className="flex flex-col w-full items-start  gap-2">
               <div className="h-auto w-full flex flex-col">
@@ -101,13 +120,13 @@ function SinglePost({ dt }) {
         <div className="w-full text-borderLight border-b-2 h-1 mr-2"></div>
         <div className="flex w-full justify-end gap-2 mr-2  bg-background  hover:bg-background_posts_hover ">
           <IconButton aria-label="add to bookmark" onClick={handleBookmark}>
-            {/* {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />} */}
+            {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
           </IconButton>
           <IconButton onClick={handleCommentButton} aria-label="add a comment">
             <CommentIcon />
           </IconButton>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

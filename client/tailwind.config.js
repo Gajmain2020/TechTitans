@@ -19,10 +19,13 @@ export default {
       textlightmode: "#000000",
       textdarkmode: "#FFFFFF",
       borderLight: "#F1F0E8",
+      postHeader: '#1976D2',
+      buttonbg:'#0C1C2A',
 
     },
     fontFamily: {
       text: ["Roboto", "sans-serif"],
+      monteserat:["Monteserra", 'sans-serif']
     },
     extend: {},
   },

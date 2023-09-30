@@ -186,14 +186,16 @@ function ResponsiveDrawer(props) {
                 <p className="font-bold">Credit Connect</p>
               </Typography>
 
-              <Link to='/complaint' >
+              {/* <Link to='/complaint' >
               <Button >
                 Complaint
               </Button>
               </Link>
+              <Link to='/about'>
               <Button>
                 About Us
               </Button>
+              </Link> */}
               
             </div>
 
