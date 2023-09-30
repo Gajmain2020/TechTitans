@@ -71,6 +71,7 @@ function ResponsiveDrawer(props) {
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [userid, setUserid] = React.useState('1234')
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -114,20 +115,24 @@ function ResponsiveDrawer(props) {
             </NavLink>
           </ListItem>
           <ListItem disablePadding>
+            <Link to={'/activity/'+`${userid}`}>
             <ListItemButton>
               <ListItemIcon>
                 <LibraryAddCheckIcon />
               </ListItemIcon>
               <ListItemText>Activity</ListItemText>
             </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem disablePadding>
+            <Link to='/bookmarks/1234'>
             <ListItemButton>
               <ListItemIcon>
                 <BookmarksIcon />
               </ListItemIcon>
               <ListItemText>Bookmarks</ListItemText>
             </ListItemButton>
+            </Link>
           </ListItem>
           <Link to='/message'>
           <ListItem disablePadding>
@@ -429,20 +434,25 @@ function SideBarforSearch(props) {
             </NavLink>
           </ListItem>
           <ListItem disablePadding>
+            <Link to='/activity/1234' >
             <ListItemButton>
               <ListItemIcon>
                 <LibraryAddCheckIcon />
               </ListItemIcon>
               <ListItemText>Activity</ListItemText>
             </ListItemButton>
+
+            </Link>
           </ListItem>
           <ListItem disablePadding>
+            <Link to='/bookmarks/1234'>
             <ListItemButton>
               <ListItemIcon>
                 <BookmarksIcon />
               </ListItemIcon>
               <ListItemText>Bookmarks</ListItemText>
             </ListItemButton>
+            </Link>
           </ListItem>
           <Link to='/message' >
           <ListItem disablePadding>
