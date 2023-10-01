@@ -153,7 +153,6 @@ function ResponsiveDrawer(props) {
                 <p className="font-bold">Credit Connect</p>
               </Typography>
 
-<<<<<<< HEAD
               {/* <Link to='/complaint' >
               <Button >
                 Complaint
@@ -164,13 +163,6 @@ function ResponsiveDrawer(props) {
                 About Us
               </Button>
               </Link> */}
-              
-=======
-              <Link to="/complaint">
-                <Button>Complaint</Button>
-              </Link>
-              <Button>About Us</Button>
->>>>>>> 1f2670835f765a69f4c52fbde6e2b25ea58521b4
             </div>
 
             <IconButton
